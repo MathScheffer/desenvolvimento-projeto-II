@@ -1,0 +1,34 @@
+img {
+    width: 30px;
+    height: 30px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+table, td, th {
+    border: 1px solid;
+  }
+th:nth-child(6){
+    min-width: 75px;
+}
+table {
+width: 90%;
+border-collapse: collapse;
+text-align: center;
+
+}
+
+th{
+    padding: 0 5px 0;
+}
+
+tr td:first-child{
+    text-transform: lowercase;
+    text-align: left;
+    padding: 5px;
+}
+
+tr td:first-child::first-letter{
+    text-transform: uppercase;
+}
