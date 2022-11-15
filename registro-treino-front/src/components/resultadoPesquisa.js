@@ -1,7 +1,6 @@
 import PesquisaContext from "../contexts/pesquisaContext"
 import { useContext } from "react"
 const ResultadoPesquisa = () => {
-    const pesquisa = useContext(PesquisaContext);
     
     return (
         <div id="resultado">

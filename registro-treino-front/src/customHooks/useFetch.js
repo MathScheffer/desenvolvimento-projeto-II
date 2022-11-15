@@ -14,10 +14,17 @@ const useFetch = () => {
       response = await fetch(url, options);
     //  console.log(`Response: ${response}`)
       json = await response.json();
-      //console.log(`Json: $${json}`)
-      if (response.ok === false) throw new Error(json.message);
+      if (response.ok === false) {
+        if (typeof error === 'object'){
+            setError(json)
+            json = null
+        }else{
+          throw new Error(error)
+        }
+        
+      };
+      
     } catch (err) {
-      //console.log(err)
       json = null;
       setError(err);
     } finally {
@@ -26,7 +33,7 @@ const useFetch = () => {
       return { response, json };
     }
   }, []);
-    console.log(`Data no useFetch: ${data}`)
+    //console.log(`Data no useFetch: ${data}`)
   return { data, loading, error, request };
 };
 

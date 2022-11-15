@@ -1,6 +1,13 @@
-const Button = ({titulo, ...props}) => {
+import { NavLink } from "react-router-dom";
+
+const Button = ({titulo, type="simple", ...props}) => {
     return(
-        <button {...props}>{titulo}</button>
+        <>
+            {type === 'simple'  && <button {...props}>{titulo}</button>}
+            
+        </>
+        
+        
     )
 }
 

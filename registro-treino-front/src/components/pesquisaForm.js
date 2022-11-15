@@ -1,6 +1,7 @@
  import useFetch from "../customHooks/useFetch";
 import { useEffect, useRef, useState} from "react"; 
 import Button from "./button";
+import { NavLink } from "react-router-dom";
 
 const PesquisaForm = (props) => {
     const { data, loading, error, request } = useFetch();
@@ -44,7 +45,7 @@ const PesquisaForm = (props) => {
                              <li key={usuario.id}>
                                 <span>{usuario.nome}</span> 
                                 <span>
-                                    <Button titulo="editar"/>
+                                    <NavLink to={`/editar/${usuario._id}`}>editar</NavLink>
                                     <Button titulo="excluir"/>
                                 </span>
                              </li>
@@ -59,6 +60,8 @@ const PesquisaForm = (props) => {
                     <li>Criar botoes para mostrar os displays dos formulrarios</li>
                     <li>Estilizar os botoes</li>
                     <li>Ajeitar o logo do header</li>
+                    <li><stron>Adicionar reatividade entre os dois forms: Ao Adicionar
+                        um usuario, carregar o mesmo na lista</stron></li>
                 </ol>
             </section>
             

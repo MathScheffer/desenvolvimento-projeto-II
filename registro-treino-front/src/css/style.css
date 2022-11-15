@@ -124,10 +124,7 @@ O ^ seleciona todos os elementos que começarem com 'grid-'*/
   }
 }
 .row {
-  position: relative;
   display: flex;
-  margin-left: -10px;
-  margin-right: -10px;
 }
 @media screen and (max-width: 799px) {
   .row {
@@ -167,12 +164,18 @@ div {
   margin-bottom: 20px;
 }
 
-button {
+button, a {
   background: white;
   border: none;
   padding: 5px;
   border-radius: 4px;
   box-shadow: 2px 2px 3px #aaa;
+}
+
+a {
+  text-decoration: none;
+  text-align: center;
+  color: black;
 }
 
 li {
@@ -288,16 +291,27 @@ input {
   width: 30%;
 }
 
+#pesquisa-form form {
+  display: flex;
+  flex-direction: column;
+}
+
+#pesquisa-form button,
+#pesquisa-form a {
+  width: 30%;
+}
+
 #resultado {
   background-color: #f2f2f2;
   padding: 5px;
-  height: 233;
+  height: 337px;
   overflow-y: scroll;
 }
 #resultado ul > li {
   border-bottom: 1px solid #7c7c7c;
   margin-bottom: 10px;
   display: flex;
+  align-items: self-end;
 }
 #resultado ul > li span {
   width: 50%;
@@ -305,7 +319,160 @@ input {
   justify-content: space-between;
 }
 
+#mensagem {
+  position: absolute;
+  top: 0;
+  width: 100%;
+  border-radius: 7px;
+}
+#mensagem.danger {
+  background-color: tomato;
+  color: #c41d00;
+  font-size: 24px;
+}
+#mensagem.sucess {
+  background-color: #6bd682;
+  color: #007005;
+  font-size: 24px;
+}
+
+.desativada {
+  display: none;
+}
+
+.ativada {
+  display: block;
+}
+
+.card-container-rotina-row {
+  flex-wrap: wrap;
+  justify-content: center;
+}
+@media screen and (max-width: 799px) {
+  .card-container-rotina-row {
+    flex-direction: row;
+  }
+}
+
+.card-rotina-container {
+  margin-left: 20px;
+  margin-right: 20px;
+}
+
+.card-rotina {
+  background-color: #d2d2d2;
+  height: 295px;
+  width: 193px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.card-rotina .centro {
+  background-color: #FFF;
+  height: 100px;
+  width: 100px;
+  margin: 0;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.card-rotina .centro a {
+  background: white;
+  border: none;
+  padding: 0px;
+  border-radius: 0px;
+  box-shadow: none;
+}
+
+#modal-editar {
+  position: fixed;
+  height: 100vh;
+  width: 100vw;
+  top: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.75);
+}
+#modal-editar div.container {
+  background: #FFF;
+  justify-content: space-between;
+  height: 90vh;
+  top: 5vh;
+  z-index: 1000;
+  overflow-x: scroll;
+}
+#modal-editar div.container div.row:nth-child(2) {
+  background-color: black;
+  flex-wrap: wrap;
+}
+
+.editar-exercicio, .adicionar-exercicio {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: none;
+  margin-left: 10px;
+  margin-right: 10px;
+  flex: 1;
+  min-width: 180px;
+  max-width: 180px;
+}
+.editar-exercicio button, .adicionar-exercicio button {
+  background-color: gray;
+}
+
+.opcoes-container {
+  background: tomato;
+  display: none;
+}
+.opcoes-container input {
+  width: 100%;
+  margin-top: -5px;
+}
+
+.display-block {
+  display: block;
+}
+
+.name-input {
+  background-color: rgba(0, 0, 0, 0.75);
+  text-align: center;
+}
+
+.card-adicionar-exercicio {
+  margin-left: 10px;
+  margin-right: 10px;
+  cursor: pointer;
+}
+.card-adicionar-exercicio .card-rotina {
+  background-color: green;
+  height: 250px;
+  width: 180px;
+  margin-bottom: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.adicionar-exercicio {
+  position: relative;
+}
+
+.apagar-adicionar-exercicio-card {
+  background-color: tomato !important;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  position: absolute;
+  right: -10px;
+  top: -10px;
+}
+
 h1 {
   text-align: center;
   font-size: 48px;
+}
+
+button {
+  cursor: pointer;
 }

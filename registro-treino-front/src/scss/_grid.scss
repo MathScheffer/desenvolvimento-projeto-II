@@ -111,10 +111,10 @@ O ^ seleciona todos os elementos que começarem com 'grid-'*/
     //@include clearfix;
 }
 .row{
-    position:relative;
+    //position:relative;
     display: flex;
-    margin-left:- calc($gutter / 2);
-    margin-right:- calc($gutter / 2);
+    //margin-left:- calc($gutter / 2);
+   // margin-right:- calc($gutter / 2);
     @include d(s) {
         margin-left: 0px;
         margin-right: 0px;

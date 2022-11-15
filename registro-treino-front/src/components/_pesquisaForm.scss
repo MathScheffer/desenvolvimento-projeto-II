@@ -1,14 +1,24 @@
+#pesquisa-form form{
+    display: flex;
+    flex-direction: column;
+}
+
+#pesquisa-form button,
+#pesquisa-form a{
+    width: 30%;
+}
+
 #resultado{
     background-color: #f2f2f2;
     padding: 5px;
-    height: 233;
+    height: 337px;
     overflow-y: scroll;
 
     ul>li{
         border-bottom: 1px solid #7c7c7c;
         margin-bottom: 10px;
         display: flex;
-
+        align-items: self-end;
         span{
             width: 50%;
             display: flex;

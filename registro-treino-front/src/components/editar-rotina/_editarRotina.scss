@@ -1,0 +1,126 @@
+.card-container-rotina-row{
+        flex-wrap: wrap;
+        justify-content: center;
+        @include d(s){
+            flex-direction:  row   ;
+        }
+    }
+
+.card-rotina-container{
+    margin-left: 20px;
+    margin-right: 20px;
+
+}
+
+.card-rotina{
+    background-color: #d2d2d2;
+    height: 295px;
+    width: 193px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    
+    .centro{
+        background-color: #FFF;
+        height: 100px;
+        width: 100px;
+        margin: 0;
+        border-radius: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        a{
+            background: white;
+            border: none;
+            padding: 0px;
+            border-radius:0px;
+            box-shadow: none;
+        }
+    }
+}
+
+#modal-editar{
+    position: fixed;
+    height: 100vh;
+    width: 100vw;
+    top: 0;
+    left: 0;
+    background-color: rgba(0,0,0,0.75);
+
+    div.container{
+        background: #FFF;
+        justify-content: space-between;
+        height: 90vh;
+        top:5vh;
+        z-index: 1000;
+        overflow-x: scroll;
+        div.row:nth-child(2){
+            background-color: black;
+            flex-wrap: wrap;
+        }
+    }
+}
+
+.editar-exercicio, .adicionar-exercicio{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-height: none;
+    margin-left: 10px;
+    margin-right: 10px;
+    flex:1;
+    min-width: 180px;
+    max-width: 180px;
+    button {
+        background-color: gray;
+    }
+}
+
+.opcoes-container{
+    background: tomato;
+    display: none;
+
+    input{
+        width: 100%;
+        margin-top: -5px;
+    }
+}
+
+.display-block{
+    display: block;
+}
+
+.name-input {
+    background-color: rgba(0,0,0,0.75);
+    text-align: center;
+}
+
+.card-adicionar-exercicio{
+    margin-left: 10px;
+    margin-right: 10px;
+    cursor: pointer;
+    .card-rotina{
+        background-color: green;
+        height: 250px;
+        width: 180px;
+        margin-bottom: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+}
+
+.adicionar-exercicio{
+    position: relative;
+}
+.apagar-adicionar-exercicio-card{
+    background-color: tomato !important;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    position: absolute;
+    right: -10px;
+    top: -10px;
+}

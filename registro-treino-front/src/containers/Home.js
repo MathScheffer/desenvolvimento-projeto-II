@@ -17,7 +17,9 @@ const Home = () => {
                 <Header/>
             </div>
             <h1>Bem-Vindo!</h1>
+            <h2>Refatore colocando um "HomeStorage" para gerenciar os dados!</h2>
             <div class='row'>
+                
                 <CadastroForm class="grid-5"></CadastroForm>
                 <div class="grid-2"></div>
                 <PesquisaForm class='grid-5'></PesquisaForm>
