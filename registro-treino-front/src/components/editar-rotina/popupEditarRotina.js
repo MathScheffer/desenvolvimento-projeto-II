@@ -11,44 +11,51 @@ const PopupEditarRotina = () => {
 
     const editarRotinaContext = useContext(EditarRotinaContext);
     const [addCard, setAddCard] = useState(0);
+    const [cardIndex, setCardIndex] = useState();
+    const [apagarCard, setApagarCard] = useState(0);
     const [formsAddList, setFormsAddList] = useState([]);
+    const [reloadPopup, setReloadPopup] = useState(0);
     
     useEffect(() => {
+        console.log('reload popup')
+        editarRotinaContext.setReload(reload => reload + 1)
+    },[reloadPopup])
 
+    useEffect(() => {
             if(isAddCard.current){
-                console.log('entrou aqui')
-                setFormsAddList([...formsAddList,<AdicionarExercicio 
-                    indexCard={formsAddList.length - 1}
+                setFormsAddList([...formsAddList,
+                    <AdicionarExercicio 
+                    indexCard={formsAddList.length}
+                    key={formsAddList.length}
+                    apagarAddCard={apagarAddCard}
+                    setReloadPopup={setReloadPopup}
+                    setRotinaAtual={editarRotinaContext.setRotinaAtual}
+                    idRotina={editarRotinaContext.rotinaAtual._id}
                     ></AdicionarExercicio>])
             }
-           
-            //row.push(<AdicionarExercicio setAddCards={setAddCard}></AdicionarExercicio>)
             
     }, [addCard])
 
-    const apagarAddCard = (index) => {
+    useEffect(() => {
+        console.log(cardIndex)
         let newCards = formsAddList;
-        newCards.slice(index, 1);
+        let indexCardsArray = newCards.map(card => card.props.indexCard)
 
-        setFormsAddList(newCards)
+        newCards.splice(indexCardsArray.indexOf(cardIndex), 1)
+
+        setFormsAddList([...newCards])
+    }, [apagarCard])
+
+    const apagarAddCard = (index) => {
+        setCardIndex(index)
+        setApagarCard(apagarCard => apagarCard + 1)
     }
 
     const fecharModal = ({target}) => {
         if(target == modalContainer.current || target == botaoFechar.current){
             editarRotinaContext.setModalAtivo(false);
+            setFormsAddList([])
         }
-    }
-
-    const adicionarCards = () => {
-        const row = []
-        for(let i = addCard; i > 0; i--){
-            row.push(<AdicionarExercicio 
-                setAddCards={setAddCard}
-                apagarAddCard={apagarAddCard}
-            ></AdicionarExercicio>)
-        }
-
-        return row
     }
     
 return(
@@ -61,6 +68,9 @@ return(
             </div>
 
             <div className="row">
+                {
+                    //PRECISO DAR UM JEITO DE ATUALIZAR ESTE CONTEXT (CARD)
+                }
                 {editarRotinaContext.rotinaAtual.exercicios.map( exercicio => {
                     return <EditarExercicio exercicio={exercicio} 
                             setReload={editarRotinaContext.setReload}></EditarExercicio>

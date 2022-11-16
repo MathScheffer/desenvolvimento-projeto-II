@@ -1,15 +1,14 @@
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import EditarRotinaContext from "./editarRotinaContext";
 
 const CardRotinaUi = ({rotina}) => {
     const editarRotinaContext = useContext(EditarRotinaContext);
-    const navigate = useNavigate();
 
-    const navigateTo = (id) => {
-        navigate()
-    }
-
+    useEffect(() => {
+        editarRotinaContext.setRotinaAtual(rotina)
+    },[rotina])
+    
     const setarModal = () => {
         editarRotinaContext.setModalAtivo( !editarRotinaContext.modalAtivo);
         editarRotinaContext.setRotinaAtual(rotina)

@@ -1,26 +1,102 @@
+import requests from '../../constants/requests';
+
 import AdicionarExercicioUi from "./adicionarFormExercicioUi";
 import useFetch from '../../customHooks/useFetch';
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
-const AdicionarExercicio = ({indexCard, apagarAddCard}) => {
+const AdicionarExercicio = ({indexCard, apagarAddCard, idRotina, setReloadPopup}) => {
+    const atributos = useRef()
+    const doRequest = useRef(false);
+
     const {data, loading, error, request} = useFetch();
-    const [apagar, setApagar] = useState(0);
+    const [addRequest, setAddRequest] = useState(0);
 
+    const [form,setForm] = useState({})
+
+    useEffect(() => {
+        console.log(idRotina)
+    },[idRotina])
+
+    useEffect(() => {
+        const body = limparChavesVazias();
+        console.log(body)
+
+        const options = {
+            'method':'PUT',
+            'headers':{
+                'Content-Type':'application/json'
+            },
+            'body':JSON.stringify(body)
+        }
+        if(doRequest.current){
+            request(requests.PUT_ADD_EXERCICIO(idRotina), options)
+            .then(response => {
+                if(response.ok){
+                    console.log(response)
+                    apagarAddCard(indexCard)
+                }
+                
+            })
+
+            setReloadPopup(reload => reload + 1)
+        }
+    },[addRequest])
+
+    useEffect(() => {
+        console.log(error)
+    },[error])
     useEffect(() => {
         console.log(indexCard)
     }, [indexCard])
 
     useEffect(() => {
-        if(apagar){
-        }
-    },[apagar])
+        console.log(form)
+    },[form])
 
+//Retira as chaves vazias, impedindo o request caso haja campos vazios no formulario
+
+    const limparChavesVazias = () => {
+        let body = form;
+
+        for(var a in body){
+            if(!body[a]){
+                delete body[a]
+            }
+        }
+
+        return body
+    }
+//apaga este componente
     const apagarCard = () => {
-        setApagar(apagar => apagar+1);
+        apagarAddCard(indexCard)
     }
     
+    const handleChange = ({ target }) => {
+        const { id, value } = target;        
+        setForm({ ...form, [id]: value });
+    }
+
+    const onSubmit = (event) => {
+        event.preventDefault();
+    }
+
+    const salvar = () => {
+        doRequest.current = true;
+        
+        setAddRequest(addRequest => addRequest + 1);
+    }
+
     return(
-        <AdicionarExercicioUi apagarCard={apagarAddCard}></AdicionarExercicioUi>
+        <AdicionarExercicioUi  
+            nome={form.nome}
+            repeticoes={form.repeticoes}
+            series={form.series}
+            onSubmit={onSubmit}
+            handleChange={handleChange}
+            atributos={atributos} 
+            salvar={salvar}
+            apagarCard={apagarCard}
+        ></AdicionarExercicioUi>
     )
 }
 

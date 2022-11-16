@@ -23,6 +23,7 @@ const EditarExercicio = ({exercicio, setReload}) => {
     const atributos = useRef();
     const fetchData = useRef(false);
     const putData = useRef(false);
+    const deleteData = useRef(false);
     const [updateRequest, setUpdateRequest] = useState(0);
     const [fetchedData, setFetchedData] = useState();
     const [updatedDate, setUpdatedData] = useState();
@@ -88,6 +89,27 @@ const EditarExercicio = ({exercicio, setReload}) => {
             })
         }
     },[updateRequest])
+
+    useEffect(() => {
+        const options = {
+            'method':'DELETE',
+            'headers':{
+                'Content-Type':'application/json'
+            }
+
+        }
+
+        if(deleteData.current){
+            request(requests.DELETE_EXERCICIO(exercicio._id), options)
+            .then(response => {
+                console.log(response)
+                if(response.json && response.json.exercicio){
+                    setReload(reload => reload+1)
+                }
+            })
+        }
+        
+    }, [])
 
     useEffect(() => {
         console.log(error)

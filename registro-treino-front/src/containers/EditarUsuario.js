@@ -26,11 +26,12 @@ const EditarUsuario = () => {
             request(url)    
             
         }
-    },[request,reload])
+    },[reload])
 
     useEffect(() => {
-        console.log(data)
         setUsuario(data)
+        console.log("Rotina no EditarUsuario")
+        console.log(usuario)
     },[data])
 
     return(
@@ -38,6 +39,7 @@ const EditarUsuario = () => {
         <>
         {usuario &&
             <EditarRotina nome={usuario.nome} rotina={usuario.rotina} reload={reload} setReload={setReload}/>
+            
         }
         
         </>

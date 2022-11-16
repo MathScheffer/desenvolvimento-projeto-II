@@ -2,13 +2,21 @@ import CardRotinaUi from "./cardRotinaUi";
 import OrdenacaoDias from "../../utils/ordenacaoDias";
 import EditarRotinaContext from './editarRotinaContext';
 import PopupEditarRotina from "./popupEditarRotina";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const EditarRotina = ({nome,rotina, reload, setReload}) => {
+    
+    //const [rotinaOrdenada, setRotinaOrdenada] = useState();
     const rotinaOrdenada = new OrdenacaoDias(rotina).getRotinaOrdenada();
     const [modalAtivo, setModalAtivo] = useState(false);
     const [rotinaAtual, setRotinaAtual] = useState();
 
+    useEffect(() => {
+        console.log("Rotina no EditarRotina")
+        console.log(rotina)
+        
+    },[rotina])
+    
 
     return(
         <>

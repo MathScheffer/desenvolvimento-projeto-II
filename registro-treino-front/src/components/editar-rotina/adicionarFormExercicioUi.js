@@ -2,7 +2,6 @@ const AdicionarExercicioUi = ({atributos,
     nome, 
     series, 
     repeticoes, 
-    carga,
     onSubmit, 
     salvar,
     apagarCard,
@@ -15,6 +14,7 @@ const AdicionarExercicioUi = ({atributos,
         
         <form onSubmit={onSubmit} className="opcoes-container display-block" ref={atributos}>
             <input 
+                required
                 id="nome"
                 className="name-input" 
                 value={nome}
@@ -22,18 +22,15 @@ const AdicionarExercicioUi = ({atributos,
             />
 
             <input 
+            required
                 id="series"
                 value={series}
                 onChange={handleChange}
             />
             <input 
+            required
                 id="repeticoes" 
                 value={repeticoes}
-                onChange={handleChange}
-            />
-            <input 
-                id="carga" 
-                value={carga}
                 onChange={handleChange}
             />
 
