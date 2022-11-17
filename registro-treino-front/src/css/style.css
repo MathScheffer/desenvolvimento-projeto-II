@@ -357,6 +357,7 @@ input {
 .card-rotina-container {
   margin-left: 20px;
   margin-right: 20px;
+  cursor: pointer;
 }
 
 .card-rotina {
@@ -419,6 +420,11 @@ input {
 }
 .editar-exercicio button, .adicionar-exercicio button {
   background-color: gray;
+}
+.editar-exercicio div.container-buttons, .adicionar-exercicio div.container-buttons {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 5px;
 }
 
 .opcoes-container {

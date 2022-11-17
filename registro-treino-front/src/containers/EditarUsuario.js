@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
-import { useParams } from "react-router-dom";
+import { Outlet, useParams } from "react-router-dom";
 import EditarRotina from "../components/editar-rotina/editarRotina";
 import useFetch from "../customHooks/useFetch";
 
@@ -38,7 +38,11 @@ const EditarUsuario = () => {
         
         <>
         {usuario &&
-            <EditarRotina nome={usuario.nome} rotina={usuario.rotina} reload={reload} setReload={setReload}/>
+        <>
+        <EditarRotina nome={usuario.nome} rotina={usuario.rotina} reload={reload} setReload={setReload}/>
+        <Outlet/>
+        </>
+            
             
         }
         

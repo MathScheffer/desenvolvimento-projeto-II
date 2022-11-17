@@ -9,6 +9,7 @@
 .card-rotina-container{
     margin-left: 20px;
     margin-right: 20px;
+    cursor: pointer;
 
 }
 
@@ -76,7 +77,15 @@
     button {
         background-color: gray;
     }
+
+    div.container-buttons{
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 5px;
+    }
 }
+
+
 
 .opcoes-container{
     background: tomato;

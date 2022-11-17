@@ -3,23 +3,38 @@ import AdicionarExercicio from "./adicionarExercicio";
 import ActionAdicionarExercicio from "./actionAdicionarExercicio";
 import EditarExercicio from "./editarExercicio";
 import EditarRotinaContext from "./editarRotinaContext";
+import { useNavigate, useParams } from "react-router-dom";
+import useFetch from "../../customHooks/useFetch";
+
+import requests from '../../constants/requests';
 
 const PopupEditarRotina = () => {
+    const navigate = useNavigate();
+
     const modalContainer = useRef();
     const botaoFechar = useRef();
     const isAddCard = useRef(false);
 
-    const editarRotinaContext = useContext(EditarRotinaContext);
+    const params = useParams()
+
+    const [rotinaAtual, setRotinaAtual] = useState();
+    const [modalAtivo, setModalAtivo] = useState(true)
     const [addCard, setAddCard] = useState(0);
     const [cardIndex, setCardIndex] = useState();
     const [apagarCard, setApagarCard] = useState(0);
     const [formsAddList, setFormsAddList] = useState([]);
     const [reloadPopup, setReloadPopup] = useState(0);
     
+    const {data, loading, error, request} = useFetch();
+
     useEffect(() => {
-        console.log('reload popup')
-        editarRotinaContext.setReload(reload => reload + 1)
+        request(requests.GET_ROTINA(params.id_rotina))
     },[reloadPopup])
+
+    useEffect(() => {
+       setRotinaAtual(data)
+        
+    },[data])
 
     useEffect(() => {
             if(isAddCard.current){
@@ -29,11 +44,9 @@ const PopupEditarRotina = () => {
                     key={formsAddList.length}
                     apagarAddCard={apagarAddCard}
                     setReloadPopup={setReloadPopup}
-                    setRotinaAtual={editarRotinaContext.setRotinaAtual}
-                    idRotina={editarRotinaContext.rotinaAtual._id}
+                    idRotina={params.id_rotina}
                     ></AdicionarExercicio>])
-            }
-            
+            }  
     }, [addCard])
 
     useEffect(() => {
@@ -53,28 +66,31 @@ const PopupEditarRotina = () => {
 
     const fecharModal = ({target}) => {
         if(target == modalContainer.current || target == botaoFechar.current){
-            editarRotinaContext.setModalAtivo(false);
-            setFormsAddList([])
+            setModalAtivo(false);
+            setFormsAddList([]);
+            navigate("/editar/" + params.id)
         }
     }
     
 return(
     <>
-    {editarRotinaContext.modalAtivo && 
+    {(modalAtivo && rotinaAtual) && 
     <section id='modal-editar'  onClick={fecharModal} ref={modalContainer}> 
         <div className="container">
             <div className="row">
-                <h1>{editarRotinaContext.rotinaAtual.dia}</h1>
+                <h1>{rotinaAtual.dia}</h1>
             </div>
 
             <div className="row">
-                {
-                    //PRECISO DAR UM JEITO DE ATUALIZAR ESTE CONTEXT (CARD)
-                }
-                {editarRotinaContext.rotinaAtual.exercicios.map( exercicio => {
-                    return <EditarExercicio exercicio={exercicio} 
-                            setReload={editarRotinaContext.setReload}></EditarExercicio>
-                })}
+                {rotinaAtual.exercicios.map( exercicio => {
+                return <EditarExercicio 
+                //parâmetro KEY é extremamente obrigatório passar para o react reconhecer
+                //as mudanças!
+                    key={exercicio._id}
+                    exercicio={exercicio} 
+                    setReloadPopup={setReloadPopup}
+                ></EditarExercicio>
+            })}
                 {
                     formsAddList
                 }
@@ -93,12 +109,8 @@ return(
             </div>
         </div>
     </section>
-    
-    }
-        
-    </>
-    
-)
-}
+    }   
+    </>   
+)}
 
 export default PopupEditarRotina;

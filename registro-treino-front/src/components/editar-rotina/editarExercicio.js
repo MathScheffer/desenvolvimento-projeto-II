@@ -19,16 +19,13 @@ const toggle = () => {
 
     //<button onClick={toggle}>{exercicio.nome}</button>
                 
-const EditarExercicio = ({exercicio, setReload}) => {
+const EditarExercicio = ({exercicio, setReloadPopup}) => {
     const atributos = useRef();
-    const fetchData = useRef(false);
     const putData = useRef(false);
     const deleteData = useRef(false);
     const [updateRequest, setUpdateRequest] = useState(0);
-    const [fetchedData, setFetchedData] = useState();
-    const [updatedDate, setUpdatedData] = useState();
+    const [deleteRequest, setDeleteRequest] = useState(0);
     
-    const [carregarUi, setCarregarUi] = useState('');
     const [form,setForm] = useState({
         nome: "",
         repeticoes: "",
@@ -39,23 +36,6 @@ const EditarExercicio = ({exercicio, setReload}) => {
     })
 
     const {data, loading, error, request} = useFetch();
-
-/*     useEffect(() => {
-        console.log(fetchData)
-        if(fetchData.current){
-            console.log(fetchData)
-            request(requests.GET_EXERCICIO(exercicio._id))
-            .then(response => {
-                if(response && response.json.length > 0) {
-                    console.log(response.json[0])
-                    setFetchedData(response.json[0])
-                }else{
-                    console.log(response.json)
-                    setFetchedData(response)
-                }
-            })
-        }
-    },[updateRequest]) */
 
     useEffect(() => {
         const initiValues = {
@@ -84,7 +64,7 @@ const EditarExercicio = ({exercicio, setReload}) => {
             .then(response => {
                 console.log(response)
                 if(response.json && response.json.exercicio){
-                    setReload(reload => reload+1)
+                    //setReloadPopup(reload => reload+1)
                 }
             })
         }
@@ -100,16 +80,19 @@ const EditarExercicio = ({exercicio, setReload}) => {
         }
 
         if(deleteData.current){
+            console.log(`Exercicio id: ${exercicio._id}`)
+            console.log(`Exercicio nome: ${exercicio.nome}`)
             request(requests.DELETE_EXERCICIO(exercicio._id), options)
             .then(response => {
                 console.log(response)
-                if(response.json && response.json.exercicio){
-                    setReload(reload => reload+1)
+                if(response.response.ok === true){
+                    
+                    setReloadPopup(reload => reload + 1)
                 }
             })
         }
         
-    }, [])
+    }, [deleteRequest])
 
     useEffect(() => {
         console.log(error)
@@ -120,10 +103,14 @@ const EditarExercicio = ({exercicio, setReload}) => {
     }
 
     const salvar = () => {
-        fetchData.current = true;
         putData.current = true;
         atributos.current.reset()
         setUpdateRequest(updateRequest => updateRequest + 1);
+    }
+
+    const excluir = () => {
+        deleteData.current = true;
+        setDeleteRequest(deleteRequest => deleteRequest + 1);
     }
 
     function handleChange({ target }) {
@@ -132,7 +119,7 @@ const EditarExercicio = ({exercicio, setReload}) => {
     }
 
     useEffect(() => {
-        console.log(form)
+      //  console.log(form)
     },[form])
     
     return(
@@ -170,6 +157,7 @@ const EditarExercicio = ({exercicio, setReload}) => {
                 carga={form.carga}
                 cargaAlcancada={form.cargaAlcancada}
                 salvar={salvar}
+                excluir={excluir}
                 onSubmit={onSubmit}
                 key={exercicio._id}
                 handleChange={handleChange}

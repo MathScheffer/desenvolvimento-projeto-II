@@ -19,7 +19,7 @@ const AdicionarExercicio = ({indexCard, apagarAddCard, idRotina, setReloadPopup}
 
     useEffect(() => {
         const body = limparChavesVazias();
-        console.log(body)
+        //console.log(body)
 
         const options = {
             'method':'PUT',
@@ -31,14 +31,11 @@ const AdicionarExercicio = ({indexCard, apagarAddCard, idRotina, setReloadPopup}
         if(doRequest.current){
             request(requests.PUT_ADD_EXERCICIO(idRotina), options)
             .then(response => {
-                if(response.ok){
-                    console.log(response)
+                if(response.response.ok){
                     apagarAddCard(indexCard)
+                    setReloadPopup(reload => reload + 1)
                 }
-                
             })
-
-            setReloadPopup(reload => reload + 1)
         }
     },[addRequest])
 
@@ -50,11 +47,15 @@ const AdicionarExercicio = ({indexCard, apagarAddCard, idRotina, setReloadPopup}
     }, [indexCard])
 
     useEffect(() => {
-        console.log(form)
+       // console.log(form)
     },[form])
 
-//Retira as chaves vazias, impedindo o request caso haja campos vazios no formulario
-
+/**
+ * limpa as chaves vazias do formulario, impedindo que um formulario com chaves vazias seja
+ * enviado para a api
+ * @returns void
+ * 
+ */
     const limparChavesVazias = () => {
         let body = form;
 

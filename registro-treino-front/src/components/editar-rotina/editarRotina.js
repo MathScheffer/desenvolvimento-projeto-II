@@ -3,9 +3,10 @@ import OrdenacaoDias from "../../utils/ordenacaoDias";
 import EditarRotinaContext from './editarRotinaContext';
 import PopupEditarRotina from "./popupEditarRotina";
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const EditarRotina = ({nome,rotina, reload, setReload}) => {
-    
+    const navigate = useNavigate();
     //const [rotinaOrdenada, setRotinaOrdenada] = useState();
     const rotinaOrdenada = new OrdenacaoDias(rotina).getRotinaOrdenada();
     const [modalAtivo, setModalAtivo] = useState(false);
@@ -16,7 +17,6 @@ const EditarRotina = ({nome,rotina, reload, setReload}) => {
         console.log(rotina)
         
     },[rotina])
-    
 
     return(
         <>
@@ -24,29 +24,23 @@ const EditarRotina = ({nome,rotina, reload, setReload}) => {
         
         <div className="container">
             <div className="row card-container-rotina-row">
-                <EditarRotinaContext.Provider value={{
-                    modalAtivo,
-                    setModalAtivo,
-                    rotinaAtual,
-                    setRotinaAtual,
-                    reload,
-                    setReload
-                    }}>
-
-                    <PopupEditarRotina/>
-
                     {rotinaOrdenada ? 
                     rotinaOrdenada.map(rotinaOrdenada => {
                         return (
-                            <CardRotinaUi key={rotinaOrdenada._id} rotina={rotinaOrdenada}/>
+                            <CardRotinaUi 
+                                key={rotinaOrdenada._id} 
+                                rotina={rotinaOrdenada}
+                            />
                         )
                     }) : rotina.map(rotina => {
                         return (
-                            <CardRotinaUi key={rotina._id} rotina={rotina}/>
+                            <CardRotinaUi 
+                                key={rotina._id} 
+                                rotina={rotina}
+                            />
                         )
                     })
                     }
-                </EditarRotinaContext.Provider>
             </div>
         </div>
         </>

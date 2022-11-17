@@ -7,6 +7,7 @@ const EditarExercicioUi = ({atributos,
     cargaAlcancada,
     onSubmit, 
     salvar,
+    excluir,
     handleChange
 }) => {
     return(
@@ -51,7 +52,10 @@ const EditarExercicioUi = ({atributos,
                 value={repeticoesFeitas}
                 onChange={handleChange}
             />
-            <button onClick={salvar}>Salvar</button>
+            <div className="container-buttons">
+                <button onClick={salvar}>Salvar</button>
+                <button onClick={excluir}>Excluir</button>
+            </div>
         </form>
     </div>
     
