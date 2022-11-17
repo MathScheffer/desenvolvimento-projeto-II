@@ -5,6 +5,7 @@ const EditarExercicioUi = ({atributos,
     repeticoesFeitas,
     carga,
     cargaAlcancada,
+    id,
     onSubmit, 
     salvar,
     excluir,
@@ -21,37 +22,48 @@ const EditarExercicioUi = ({atributos,
                 value={nome}
                 onChange={handleChange}
             />
-
-            <input 
-                id="series"
-                placeholder={series}  
-                value={series}
-                onChange={handleChange}
-            />
+            <label data-serie='Serie(S)'>
+                <input 
+                    id="series"
+                    placeholder={series}  
+                    value={series}
+                    onChange={handleChange}
+                />
+            </label>
+            <label data-repeticoes='Repetições(R)'>
             <input 
                 id="repeticoes"
                 placeholder={repeticoes}  
                 value={repeticoes}
                 onChange={handleChange}
             />
-            <input 
-                id="carga"
-                placeholder={carga}  
-                value={carga}
-                onChange={handleChange}
-            />
-            <input 
-                id="cargaAlcancada"
-                placeholder={cargaAlcancada}  
-                value={cargaAlcancada}
-                onChange={handleChange}
-            />
-            <input 
-                id="repeticoesFeitas"
-                placeholder={repeticoesFeitas}  
-                value={repeticoesFeitas}
-                onChange={handleChange}
-            />
+            </label>
+            
+            <label data-carga='Carga(C)'>
+                <input 
+                    id="carga"
+                    placeholder={carga}  
+                    value={carga}
+                    onChange={handleChange}
+                />
+            </label>
+            <label data-cargaalcan='Carga Alcançada(CA)'>
+                <input 
+                    id="cargaAlcancada"
+                    placeholder={cargaAlcancada}  
+                    value={cargaAlcancada}
+                    onChange={handleChange}
+                />
+            </label>
+            <label data-repeticoesf='Repetições feitas(RF)'>
+                <input 
+                    id="repeticoesFeitas"
+                    placeholder={repeticoesFeitas}  
+                    value={repeticoesFeitas}
+                    onChange={handleChange}
+                />
+            </label>
+            
             <div className="container-buttons">
                 <button onClick={salvar}>Salvar</button>
                 <button onClick={excluir}>Excluir</button>

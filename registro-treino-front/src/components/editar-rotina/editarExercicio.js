@@ -159,6 +159,7 @@ const EditarExercicio = ({exercicio, setReloadPopup}) => {
                 salvar={salvar}
                 excluir={excluir}
                 onSubmit={onSubmit}
+                id={exercicio._id}
                 key={exercicio._id}
                 handleChange={handleChange}
             />
