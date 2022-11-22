@@ -1,4 +1,5 @@
-import React  from 'react';
+import React, { useState }  from 'react';
+import { Helmet } from 'react-helmet';
 import { Link, NavLink, Route, Routes } from 'react-router-dom';
 
 import CadastroForm from '../components/cadastroForm';
@@ -8,24 +9,40 @@ import PesquisaForm from '../components/pesquisaForm';
 import '../css/style.css';
 
 const Home = () => {
+    const [triggerGetUsuarios,setTriggerGetUsuarios] = useState();
+    const [nome,setNome] = useState("");
 
-    
     return (
         //<div class='grid grid-template' id='Home'>
-        <div class="container">
-            <div class='row'>
+        <>
+        <Helmet>
+            <meta charset="UTF-8" />
+            <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+            <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        </Helmet>
+
+        <div className="container" id='home'>
+            <div className='row'>
                 <Header/>
             </div>
             <h1>Bem-Vindo!</h1>
-            <h2>Refatore colocando um "HomeStorage" para gerenciar os dados!</h2>
-            <div class='row'>
+            <div className='row' id='container-home'>
                 
-                <CadastroForm class="grid-5"></CadastroForm>
-                <div class="grid-2"></div>
-                <PesquisaForm class='grid-5'></PesquisaForm>
+                <CadastroForm
+                    setTriggerGetUsuarios={setTriggerGetUsuarios} 
+                    setNome={setNome}
+                    className="grid-5"
+                >
+                </CadastroForm>
+                <PesquisaForm 
+                    triggerGetUsuarios={triggerGetUsuarios} 
+                    className='grid-5'
+                    nome={nome}
+                    setNome={setNome}
+                ></PesquisaForm>
             </div>
         </div>
-
+        </>
     )
 }
 

@@ -1,19 +1,28 @@
-import PesquisaContext from "../contexts/pesquisaContext"
-import { useContext } from "react"
-const ResultadoPesquisa = () => {
-    
+
+import Button from "./button"
+import ResultadoPesquisaUi from "./resultadoPesquisaUI"
+const ResultadoPesquisa = ({usuarios, excluirUsuario}) => {
+
+    const renderResultadoPesquisaUi =() => {
+
+        if(usuarios){
+            return usuarios.map(usuario =>{
+               return (
+                    <ResultadoPesquisaUi 
+                        key={usuario._id}
+                        usuario={usuario}
+                        excluirUsuario={excluirUsuario}
+                    />
+                )
+            })
+        }
+        
+    }
+
     return (
         <div id="resultado">
             <ul>
-                { usuarios && usuarios.map( usuario =>
-                    <li key={usuario.id}>
-                        <span>{usuario.nome}</span> 
-                        <span>
-                            <Button titulo="editar"/>
-                            <Button titulo="excluir"/>
-                        </span>
-                    </li>
-                )}
+                { renderResultadoPesquisaUi() }
             </ul>
         </div>
     )

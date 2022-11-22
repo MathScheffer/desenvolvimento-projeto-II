@@ -1,14 +1,15 @@
+import { NavLink } from "react-router-dom";
 import Button from "./button";
 
 
 const Header = () => {
 
     return(
-        <header class='container' id="Header">
-            <section id="logo" class="grid-6">
-                Logo da empresa
+        <header className='container' id="Header">
+            <section id="logo" className="grid-6">
+                <NavLink end to={"/"}>Logo da empresa</NavLink>
             </section>
-            <section id='logoff' class="grid-6">
+            <section id='logoff' className="grid-6">
                 <Button titulo='Sair'/>
             </section>
         </header>

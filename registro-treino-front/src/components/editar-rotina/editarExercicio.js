@@ -114,7 +114,8 @@ const EditarExercicio = ({exercicio, setReloadPopup}) => {
     }
 
     function handleChange({ target }) {
-        const { id, value } = target;        
+        const { id, value } = target;     
+        console.log(id, value)   
         setForm({ ...form, [id]: value });
     }
 

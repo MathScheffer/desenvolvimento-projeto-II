@@ -1,6 +1,8 @@
 import React, { useEffect, useRef, useState } from "react";
-import { Outlet, useParams } from "react-router-dom";
+import { Outlet, Route, Routes, useParams } from "react-router-dom";
 import EditarRotina from "../components/editar-rotina/editarRotina";
+import PopupEditarRotina from "../components/editar-rotina/popupEditarRotina";
+import Header from "../components/header";
 import useFetch from "../customHooks/useFetch";
 
 const EditarUsuario = () => {
@@ -37,14 +39,22 @@ const EditarUsuario = () => {
     return(
         
         <>
-        {usuario &&
+        <section className="container">
+            <div className="row"><Header /></div>
+            {usuario &&
         <>
-        <EditarRotina nome={usuario.nome} rotina={usuario.rotina} reload={reload} setReload={setReload}/>
-        <Outlet/>
+        <EditarRotina id={usuario._id} nome={usuario.nome} rotina={usuario.rotina} reload={reload} setReload={setReload}/>
+
+        <Routes>
+            <Route path='rotina/:id_rotina' element={<PopupEditarRotina setReload={setReload}/>}/>
+        </Routes>
+        
+        
         </>
-            
-            
         }
+        </section>
+        
+        
         
         </>
     )

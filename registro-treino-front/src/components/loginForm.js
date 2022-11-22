@@ -1,16 +1,7 @@
 import React  from 'react';
-/* import useRotina from '../customHooks/useRotina';
-import { useEffect } from 'react'; */
 import '../css/style.css'
+
 const LoginForm = () => {
-
-  /*const { data, loading, error, request } = useRotina()
-
-  useEffect(() => {
-    request('http://localhost:3000/api/rotinas/')
-     
-      console.log(data)
-  },[request])*/
 
   return (
     <div className='container'>

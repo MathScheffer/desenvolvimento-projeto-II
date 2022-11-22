@@ -3,7 +3,7 @@ import useFetch from "../customHooks/useFetch";
 import Mensagem from "./mensagem";
 import TratamentoErros from '../utils/tratamentoErros';
 
-const CadastroForm = (props) => {
+const CadastroForm = ({setTriggerGetUsuarios, setNome, ...props}) => {
 
     const { data, loading, error, request } = useFetch();
     const [submitTrigger, setSubmitTrigger] = useState();
@@ -50,7 +50,7 @@ const CadastroForm = (props) => {
       if(error){
         setMensagem(new TratamentoErros(error).mensagemErro())
       }
-      console.log(mensagem)
+      console.log(error)
     },error)
 
     useEffect(() =>{
@@ -76,6 +76,8 @@ const CadastroForm = (props) => {
         })
 
         setSubmitTrigger((submitTrigger) => submitTrigger !== undefined ? submitTrigger + 1 : 1);
+        setTriggerGetUsuarios((triggerGetUsuarios) => triggerGetUsuarios + 1 );
+        setNome(form.nome);
 
         formRef.current.reset()
 

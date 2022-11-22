@@ -1,5 +1,5 @@
 import requests from '../../constants/requests';
-
+import Utils from '../../utils/Utils';
 import AdicionarExercicioUi from "./adicionarFormExercicioUi";
 import useFetch from '../../customHooks/useFetch';
 import { useEffect, useRef, useState } from "react";
@@ -18,7 +18,7 @@ const AdicionarExercicio = ({indexCard, apagarAddCard, idRotina, setReloadPopup}
     },[idRotina])
 
     useEffect(() => {
-        const body = limparChavesVazias();
+        const body = Utils.imparChavesVazias(form)
         //console.log(body)
 
         const options = {
@@ -49,24 +49,7 @@ const AdicionarExercicio = ({indexCard, apagarAddCard, idRotina, setReloadPopup}
     useEffect(() => {
        // console.log(form)
     },[form])
-
-/**
- * limpa as chaves vazias do formulario, impedindo que um formulario com chaves vazias seja
- * enviado para a api
- * @returns void
- * 
- */
-    const limparChavesVazias = () => {
-        let body = form;
-
-        for(var a in body){
-            if(!body[a]){
-                delete body[a]
-            }
-        }
-
-        return body
-    }
+    
 //apaga este componente
     const apagarCard = () => {
         apagarAddCard(indexCard)

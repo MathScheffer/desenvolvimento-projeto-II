@@ -14,9 +14,9 @@ function App() {
       <Routes>
         <Route  path="/" element={<Home/>}/>
         <Route exact path='/login' element={<Login/>}/>
-        <Route exact path='/editar/:id/*' element={<EditarUsuario/>}>
-          <Route path='rotina/:id_rotina' element={<PopupEditarRotina/>}/>
-        </Route> 
+        <Route exact path='/editar/:id/*' element={<EditarUsuario/>}/>
+          
+        
 
       </Routes>
     </BrowserRouter>

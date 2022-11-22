@@ -1,30 +1,86 @@
- import useFetch from "../customHooks/useFetch";
+import requests from '../constants/requests';
+
+import useFetch from "../customHooks/useFetch";
 import { useEffect, useRef, useState} from "react"; 
 import Button from "./button";
 import { NavLink } from "react-router-dom";
+import ResultadoPesquisa from "./resultadoPesquisa";
 
-const PesquisaForm = (props) => {
+const PesquisaForm = ({triggerGetUsuarios, nome, setNome,...props}) => {
+    let doDelete = useRef(false);
+
     const { data, loading, error, request } = useFetch();
-    const [nome,setNome] = useState("");
+  
     const [usuarios, setUsuarios] = useState([]);
-    //const inputPesquisa = useRef();
+
+    const [idUsuarioForDelete, setIdUsuarioForDelete] = useState();
+    const [doDeleteIncrem, setDoDeleteIncrem] = useState(0);
 
     useEffect(() => {
         console.log(`Nome: ${nome}`)
         console.log(`Data antes da request: ${data}`)
-        request('http://localhost:3000/api/usuarios/query?nome='+nome)
+        request(requests.GET_USUARIO_BY_NOME(nome))
 
-    },[nome]) 
+    },[nome,triggerGetUsuarios]) 
+
+    useEffect(() =>{
+        console.log(error)
+    },[error])
+
+/*     useEffect(() => {
+        console.log(`Nome: ${nome}`)
+        console.log(`Data antes da request: ${data}`)
+        request(requests.GET_USUARIO_BY_NOME(nome))
+
+    },[triggerGetUsuarios])  */
+
+    useEffect(() => {
+        console.log("Usuario for delete: " + idUsuarioForDelete)
+        if(doDelete && idUsuarioForDelete) {
+
+            const options = {
+                'method':'DELETE',
+                'headers':{
+                    'Content-Type':'application/json'
+                }
+            }
+
+            console.log("entrou na request")
+            request(requests.DELETE_USUARIO(idUsuarioForDelete), options).then(resp => {
+                console.log(resp)
+            })
+        }
+    },[idUsuarioForDelete, doDeleteIncrem])
     
    useEffect(() => {
-        console.log(`Usuarios: ${usuarios}`)
-        setUsuarios(data)
+        if(data && data.length >= 0) {
+            console.log(`Usuarios: ${usuarios}`)
+            setUsuarios(data)
+
+        }else if(data && data.message === 'Usuario excluido com sucesso!'){
+            console.log("Entrou no usuario excluido")
+
+            let newUsuarios = usuarios;
+            let indexesUsuario = newUsuarios.map(usuario => usuario._id)
+
+            newUsuarios.splice(indexesUsuario.indexOf(idUsuarioForDelete), 1)
+
+            setUsuarios([...newUsuarios])
+        }
+        
     },[data]) 
 
 
     const handleChange = ({target}) => {
         setNome(target.value)
     } 
+
+    const excluirUsuario = (idUsuario) => {
+        setIdUsuarioForDelete(idUsuario);
+        setDoDeleteIncrem( doDeleteIncrem => doDeleteIncrem + 1);
+        
+        doDelete = true;
+    }
 
     return(
         <div  {...props}>
@@ -39,30 +95,11 @@ const PesquisaForm = (props) => {
                         placeholder="nome" />
                 </form>
                 
-                <div id="resultado">
-                    <ul>
-                        { usuarios && usuarios.map( usuario =>
-                             <li key={usuario.id}>
-                                <span>{usuario.nome}</span> 
-                                <span>
-                                    <NavLink to={`/editar/${usuario._id}`}>editar</NavLink>
-                                    <Button titulo="excluir"/>
-                                </span>
-                             </li>
-                        )}
-                    </ul>
-                </div>
-
-                <ol>
-                    <li>Criar componente para avisar "Uusário não encontrado!";</li>
-                    <li>Criar componentes nas listas para fazer o crud do usuário;</li>
-                    <li>Fazer sumir os formularios quando chegar em mobile</li>
-                    <li>Criar botoes para mostrar os displays dos formulrarios</li>
-                    <li>Estilizar os botoes</li>
-                    <li>Ajeitar o logo do header</li>
-                    <li><stron>Adicionar reatividade entre os dois forms: Ao Adicionar
-                        um usuario, carregar o mesmo na lista</stron></li>
-                </ol>
+                <ResultadoPesquisa 
+                    usuarios={usuarios}
+                    excluirUsuario={excluirUsuario}
+                />
+                
             </section>
             
         </div>

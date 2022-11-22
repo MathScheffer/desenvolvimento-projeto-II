@@ -1,11 +1,13 @@
-const ActionAdicionarExercicio = ({setAddCard, isAddCard}) => {
+import add from '../../assets/mais (7).png'
+
+const ActionAdicionar = ({setAddCard, isAddCard, cardType}) => {
 
     const onClick = () => {
         setAddCard(addCards => addCards+1);
         isAddCard.current = true;
     }
     return(
-        <div className='card-adicionar-exercicio' onClick={onClick}>
+        <div className={cardType} onClick={onClick}>
             <div className="card-rotina">
                 <div className="centro">
                     +
@@ -15,4 +17,4 @@ const ActionAdicionarExercicio = ({setAddCard, isAddCard}) => {
     )
 }
 
-export default ActionAdicionarExercicio;
+export default ActionAdicionar;
