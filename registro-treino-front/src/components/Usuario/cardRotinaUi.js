@@ -1,9 +1,6 @@
 import React from 'react';
 
-import excluir from '../../assets/excluir-4.png'
-
 import { Link, useNavigate } from "react-router-dom";
-import EditarRotinaContext from "./editarRotinaContext";
 
 const CardRotinaUi = ({rotina}) => {
     const navigate = useNavigate();

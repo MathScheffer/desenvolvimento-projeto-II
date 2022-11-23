@@ -3,25 +3,9 @@ import React from "react";
 import { useEffect, useRef, useState } from "react";
 import requests from '../../constants/requests';
 import useFetch from '../../customHooks/useFetch';
-import EditarExercicioUi from "./editarExercicioUi";
-/*     
-    
-    const [aberto, setAberto] = useState(true);
-
-const toggle = () => {
-
-        if(aberto){
-            atributos.current.classList.remove("display-block")
-            setAberto(false)
-        }else{
-            atributos.current.classList.add("display-block")
-            setAberto(true)
-        }
-    } */
-
-    //<button onClick={toggle}>{exercicio.nome}</button>
-                
-const EditarExercicio = ({exercicio, setReloadPopup}) => {
+import EditarTreinoUi from "./editarTreinoUi";
+        
+const EditarTreino = ({exercicio, setReloadPopup}) => {
     const atributos = useRef();
     const putData = useRef(false);
     const deleteData = useRef(false);
@@ -29,9 +13,6 @@ const EditarExercicio = ({exercicio, setReloadPopup}) => {
     const [deleteRequest, setDeleteRequest] = useState(0);
     
     const [form,setForm] = useState({
-        nome: "",
-        repeticoes: "",
-        series: "",
         carga: "",
         cargaAlcancada: "",
         repeticoesFeitas: ""
@@ -41,9 +22,6 @@ const EditarExercicio = ({exercicio, setReloadPopup}) => {
 
     useEffect(() => {
         const initiValues = {
-            nome: exercicio.nome,
-            repeticoes: exercicio.repeticoes,
-            series: exercicio.series,
             carga: exercicio.carga,
             cargaAlcancada: exercicio.cargaAlcancada,
             repeticoesFeitas: exercicio.repeticoesFeitas
@@ -73,30 +51,6 @@ const EditarExercicio = ({exercicio, setReloadPopup}) => {
     },[updateRequest])
 
     useEffect(() => {
-        const options = {
-            'method':'DELETE',
-            'headers':{
-                'Content-Type':'application/json'
-            }
-
-        }
-
-        if(deleteData.current){
-            console.log(`Exercicio id: ${exercicio._id}`)
-            console.log(`Exercicio nome: ${exercicio.nome}`)
-            request(requests.DELETE_EXERCICIO(exercicio._id), options)
-            .then(response => {
-                console.log(response)
-                if(response.response.ok === true){
-                    
-                    setReloadPopup(reload => reload + 1)
-                }
-            })
-        }
-        
-    }, [deleteRequest])
-
-    useEffect(() => {
         console.log(error)
     },[error])
 
@@ -108,11 +62,6 @@ const EditarExercicio = ({exercicio, setReloadPopup}) => {
         putData.current = true;
         atributos.current.reset()
         setUpdateRequest(updateRequest => updateRequest + 1);
-    }
-
-    const excluir = () => {
-        deleteData.current = true;
-        setDeleteRequest(deleteRequest => deleteRequest + 1);
     }
 
     function handleChange({ target }) {
@@ -127,43 +76,19 @@ const EditarExercicio = ({exercicio, setReloadPopup}) => {
     
     return(
         <>
-        {/*fetchedData ? 
-            <EditarExercicioUi
-                atributos={atributos} 
-                nome={fetchedData.nome} 
-                repeticoes={fetchedData.repeticoes}
-                series={fetchedData.series}
-                salvar={salvar}
-                onSubmit={onSubmit}
-                key={fetchedData._id}
-                handleChange={handleChange}
-            />
-            : 
-            <EditarExercicioUi
+            <EditarTreinoUi
+                key={exercicio._id}
                 atributos={atributos} 
                 nome={exercicio.nome} 
-                setNome={setNome}
                 repeticoes={exercicio.repeticoes}
                 series={exercicio.series}
-                salvar={salvar}
-                onSubmit={onSubmit}
-                key={exercicio._id}
-                handleChange={handleChange}
-            />
-    */}
-            <EditarExercicioUi
-                atributos={atributos} 
-                nome={form.nome} 
-                repeticoes={form.repeticoes}
+
                 repeticoesFeitas={form.repeticoesFeitas}
-                series={form.series}
                 carga={form.carga}
                 cargaAlcancada={form.cargaAlcancada}
+                
                 salvar={salvar}
-                excluir={excluir}
                 onSubmit={onSubmit}
-                id={exercicio._id}
-                key={exercicio._id}
                 handleChange={handleChange}
             />
         </>
@@ -172,4 +97,4 @@ const EditarExercicio = ({exercicio, setReloadPopup}) => {
     )
 }
 
-export default EditarExercicio;
+export default EditarTreino;

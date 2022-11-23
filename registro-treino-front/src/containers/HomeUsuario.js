@@ -43,10 +43,14 @@ const HomeUsuario = () => {
             <div className="row"><Header /></div>
             {usuario &&
         <>
-        <RotinaUsuario id={usuario._id} nome={usuario.nome} rotina={usuario.rotina} reload={reload} setReload={setReload}/>
+        <RotinaUsuario nome={usuario.nome} rotina={usuario.rotina}/>
 
         <Routes>
-            <Route path='rotina/:id_rotina' element={<PopupRotinaUsuario setReload={setReload}/>}/>
+            <Route 
+                path='rotina/:id_rotina' 
+                element={
+                    <PopupRotinaUsuario setReload={setReload}/>
+                }/>
         </Routes>
         
         
