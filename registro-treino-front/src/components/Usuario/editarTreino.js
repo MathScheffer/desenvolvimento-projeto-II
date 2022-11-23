@@ -4,13 +4,14 @@ import { useEffect, useRef, useState } from "react";
 import requests from '../../constants/requests';
 import useFetch from '../../customHooks/useFetch';
 import EditarTreinoUi from "./editarTreinoUi";
-        
+import TratamentoErros from "../../utils/tratamentoErros";
+import Mensagem from "../mensagem";
 const EditarTreino = ({exercicio, setReloadPopup}) => {
     const atributos = useRef();
     const putData = useRef(false);
-    const deleteData = useRef(false);
+    let timeOutRef = useRef();
+
     const [updateRequest, setUpdateRequest] = useState(0);
-    const [deleteRequest, setDeleteRequest] = useState(0);
     
     const [form,setForm] = useState({
         carga: "",
@@ -19,6 +20,7 @@ const EditarTreino = ({exercicio, setReloadPopup}) => {
     })
 
     const {data, loading, error, request} = useFetch();
+    const [mensagem, setMensagem] = useState('');
 
     useEffect(() => {
         const initiValues = {
@@ -41,16 +43,30 @@ const EditarTreino = ({exercicio, setReloadPopup}) => {
                 'body':JSON.stringify(body)
             }
             request(requests.PUT_EXERCICIO(exercicio._id), options)
-            .then(response => {
-                console.log(response)
-                if(response.json && response.json.exercicio){
-                    //setReloadPopup(reload => reload+1)
-                }
-            })
         }
     },[updateRequest])
 
     useEffect(() => {
+        console.log(data)
+        if(data && data.exercicio && data.exercicio._id){
+            setMensagem("Exercicio atualizado com sucesso!")
+            clearInterval(timeOutRef.current)
+
+            timeOutRef.current = setTimeout(() => {
+                setMensagem(null)
+            }, 1500)
+        }
+    },[data])
+
+    useEffect(() => {
+        if(error){
+            setMensagem(new TratamentoErros(error).mensagemErro())
+    
+            clearTimeout(timeOutRef.current)
+            timeOutRef.current = setTimeout(() => {
+                setMensagem(null);
+            }, 2500)
+          }
         console.log(error)
     },[error])
 
@@ -76,6 +92,8 @@ const EditarTreino = ({exercicio, setReloadPopup}) => {
     
     return(
         <>
+            {error && mensagem && <Mensagem tipo='danger' conteudo={`${mensagem}`}/>}
+            {data && mensagem && <Mensagem tipo='sucess' conteudo={mensagem} />}
             <EditarTreinoUi
                 key={exercicio._id}
                 atributos={atributos} 

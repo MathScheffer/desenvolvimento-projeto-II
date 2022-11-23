@@ -18,7 +18,7 @@ export default class TratamentoErros {
             
         }else{
             const arrAtributosUsuario = 
-            ["nome" ,"senha","whatsapp","idade","peso","sexo","objetivo","rotina"]
+            ["nome" ,"senha","whatsapp","idade","peso","sexo","objetivo","rotina","CastError"]
             for (const obj of Object.entries(this.erro)){
                 let k = obj[0]
                 console.log(k)
@@ -26,8 +26,6 @@ export default class TratamentoErros {
                 if(arrAtributosUsuario.includes(k)){
                     this.arrMessage.push(this.erro[k])
                 }
-
-                console.log(this.arrMessage)
                 
             }
         }
@@ -43,7 +41,6 @@ export default class TratamentoErros {
             this.message = this.arrMessage.join(",")
         }
 
-        console.log(this.message)
         return this.message
     }
 }

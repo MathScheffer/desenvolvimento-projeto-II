@@ -4,6 +4,8 @@ import { useEffect, useRef, useState } from "react";
 import requests from '../../constants/requests';
 import useFetch from '../../customHooks/useFetch';
 import EditarExercicioUi from "./editarExercicioUi";
+import Mensagem from '../mensagem';
+import TratamentoErros from '../../utils/tratamentoErros';
 /*     
     
     const [aberto, setAberto] = useState(true);
@@ -25,9 +27,11 @@ const EditarExercicio = ({exercicio, setReloadPopup}) => {
     const atributos = useRef();
     const putData = useRef(false);
     const deleteData = useRef(false);
+    let timeOutRef = useRef();
     const [updateRequest, setUpdateRequest] = useState(0);
     const [deleteRequest, setDeleteRequest] = useState(0);
-    
+    const [mensagem, setMensagem] = useState('');
+
     const [form,setForm] = useState({
         nome: "",
         repeticoes: "",
@@ -66,7 +70,12 @@ const EditarExercicio = ({exercicio, setReloadPopup}) => {
             .then(response => {
                 console.log(response)
                 if(response.json && response.json.exercicio){
-                    //setReloadPopup(reload => reload+1)
+                    setMensagem("Exercicio atualizado com sucesso!")
+
+                    clearTimeout(timeOutRef.current)
+                    timeOutRef.current = setTimeout(() => {
+                        setMensagem(null)
+                    }, 1500)
                 }
             })
         }
@@ -97,7 +106,14 @@ const EditarExercicio = ({exercicio, setReloadPopup}) => {
     }, [deleteRequest])
 
     useEffect(() => {
-        console.log(error)
+        if(error){
+            setMensagem(new TratamentoErros(error).mensagemErro())
+            console.log(new TratamentoErros(error).mensagemErro())
+            clearTimeout(timeOutRef.current)
+            timeOutRef.current = setTimeout(() => {
+                setMensagem(null);
+            }, 3000)
+        }
     },[error])
 
     const onSubmit = (event) => {
@@ -127,30 +143,8 @@ const EditarExercicio = ({exercicio, setReloadPopup}) => {
     
     return(
         <>
-        {/*fetchedData ? 
-            <EditarExercicioUi
-                atributos={atributos} 
-                nome={fetchedData.nome} 
-                repeticoes={fetchedData.repeticoes}
-                series={fetchedData.series}
-                salvar={salvar}
-                onSubmit={onSubmit}
-                key={fetchedData._id}
-                handleChange={handleChange}
-            />
-            : 
-            <EditarExercicioUi
-                atributos={atributos} 
-                nome={exercicio.nome} 
-                setNome={setNome}
-                repeticoes={exercicio.repeticoes}
-                series={exercicio.series}
-                salvar={salvar}
-                onSubmit={onSubmit}
-                key={exercicio._id}
-                handleChange={handleChange}
-            />
-    */}
+            {error && mensagem && <Mensagem tipo='danger' conteudo={mensagem} /> }
+            {data && mensagem && <Mensagem tipo='sucess' conteudo={mensagem} />}
             <EditarExercicioUi
                 atributos={atributos} 
                 nome={form.nome} 

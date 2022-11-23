@@ -7,12 +7,14 @@ import Utils from '../utils/Utils';
 
 const CadastroForm = ({setTriggerGetUsuarios, setNome, ...props}) => {
 
-    const { data, loading, error, request } = useFetch();
+    const { data, loading, error, request, setError } = useFetch();
     const [submitTrigger, setSubmitTrigger] = useState();
     const [mensagem, setMensagem] = useState('');
 
+
     let doRequest = useRef(false);
     const formRef = useRef();
+    let timeOutRef = useRef();
 
     const [form,setForm] = useState({
         nome:""    ,
@@ -45,27 +47,43 @@ const CadastroForm = ({setTriggerGetUsuarios, setNome, ...props}) => {
 
 
     useEffect(() => {
-       console.log(`Data: ${data}`)
+       console.log(data)
+       if(data && data._id){
+            formRef.current.reset()
+            setMensagem("Usuário adicionado com sucesso!")
+            setNome(form.nome);
+            clearTimeout(timeOutRef.current)
+            timeOutRef.current = setTimeout(() => {
+                setMensagem(null)
+            },1500)
+       }
     },[data])
 
     useEffect(() => {
       if(error){
         setMensagem(new TratamentoErros(error).mensagemErro())
+
+        clearTimeout(timeOutRef.current)
+        timeOutRef.current = setTimeout(() => {
+            setMensagem(null);
+        }, 3000)
       }
       console.log(error)
     },error)
 
     useEffect(() =>{
-       // console.log("Form: "+form);
+        console.log(form);
     },[form])
     
 
 
     function handleSubmit(event) {
         event.preventDefault();
-        console.log(`Formulario enviado: ${JSON.stringify(form)}`);
+        console.log(form);
 
-        let novoNome = form.nome + " " + form.sobrenome;
+        let novoNome = form.nome.trim().split(" ").length > 1 ? form.nome.trim().split(" ")[0] : form.nome.trim()
+        
+        novoNome = novoNome.trim()  + " " + form.sobrenome.trim();
         novoNome = Utils.montarNomeUsuario(novoNome)
         
         const senha = form.nome + "." + form.sobrenome;
@@ -81,9 +99,7 @@ const CadastroForm = ({setTriggerGetUsuarios, setNome, ...props}) => {
 
         setSubmitTrigger((submitTrigger) => submitTrigger !== undefined ? submitTrigger + 1 : 1);
         setTriggerGetUsuarios((triggerGetUsuarios) => triggerGetUsuarios + 1 );
-        setNome(form.nome);
 
-        formRef.current.reset()
 
         doRequest.current = true;
     }
@@ -96,9 +112,9 @@ const CadastroForm = ({setTriggerGetUsuarios, setNome, ...props}) => {
 
     return(
         <div  {...props}>
-            {error && <Mensagem tipo='danger' conteudo={`${mensagem}`}/>
+            {error && mensagem && <Mensagem tipo='danger' conteudo={`${mensagem}`}/>
             }
-            {data && <Mensagem tipo='sucess' conteudo='Usuario adicionado com suceso!' />}
+            {data && mensagem && <Mensagem tipo='sucess' conteudo={mensagem} />}
             
             <section id="pesquisa-form">
                 <h2>Cadastrar Aluno</h2>

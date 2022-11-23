@@ -3,16 +3,19 @@
     top: 0;
     width: 100%;
     border-radius: 7px;
+    right: 0;
+    font-size: 24px;
+    padding-left: 15px;
+    z-index: 3000;
     &.danger{
         background-color: tomato;
         color: #c41d00;
-        font-size: 24px;
+
     }
 
     &.sucess{
         background-color: #6bd682;
         color: #007005;
-        font-size: 24px;
     }
 }
 

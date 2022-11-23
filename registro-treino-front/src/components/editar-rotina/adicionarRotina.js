@@ -3,7 +3,7 @@ import React from 'react';
 import { useRef, useState, useEffect } from 'react'
 import useFetch from '../../customHooks/useFetch';
 import AdicionarRotinaUi from './adicionarRotinaUi'
-
+import Mensagem from '../mensagem';
 import requests from '../../constants/requests';
 import Utils from '../../utils/Utils';
 
@@ -17,8 +17,10 @@ const AdicionarRotina =  ({atributos,
 
     const doRequest = useRef(false);
     const doUserPutRequest = useRef(false);
+    let timeOutRef = useRef();
 
     const {data, loading, error, request} = useFetch();
+    const [mensagem, setMensagem] = useState();
 
     const [form,setForm] = useState({
         usuario: idUsuario
@@ -92,6 +94,17 @@ const AdicionarRotina =  ({atributos,
 
     useEffect(() => {
         console.log(error)
+        if(error){
+            if(error.message.includes('O usuario ja possui uma rotina no dia de')){
+                setMensagem(error.message);
+
+                clearTimeout(timeOutRef.current);
+
+                timeOutRef.current = setTimeout(() => {
+                    setMensagem(null)
+                },2500)
+            }
+        }
     },[error])
 
     //apaga este componente
@@ -115,6 +128,8 @@ const AdicionarRotina =  ({atributos,
     }
 
     return(
+        <>
+        {error && mensagem && <Mensagem tipo='danger' conteudo={mensagem} /> }
         <AdicionarRotinaUi
             form={form}
             handleChange={handleChange}
@@ -123,7 +138,7 @@ const AdicionarRotina =  ({atributos,
             onSubmit={onSubmit}
             salvar={salvar}
         ></AdicionarRotinaUi>
-    
+        </>
     )
 }
 

@@ -34,7 +34,7 @@ const useFetch = () => {
     }
   }, []);
     //console.log(`Data no useFetch: ${data}`)
-  return { data, loading, error, request };
+  return { data, loading, error, request, setError };
 };
 
 export default useFetch;
