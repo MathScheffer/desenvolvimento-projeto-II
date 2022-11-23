@@ -1,3 +1,5 @@
+import React from 'react';
+
 import add from '../../assets/mais (7).png'
 
 const ActionAdicionar = ({setAddCard, isAddCard, cardType}) => {

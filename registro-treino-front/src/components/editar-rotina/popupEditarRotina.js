@@ -1,3 +1,5 @@
+import React from "react";
+
 import { useContext, useEffect, useRef, useState } from "react";
 import AdicionarExercicio from "./adicionarExercicio";
 import ActionAdicionar from "./actionAdicionar";

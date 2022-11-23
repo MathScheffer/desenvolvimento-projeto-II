@@ -20,3 +20,5 @@ exports.PUT_USUARIO_INCREMENTAR_ROTINA= (id_usuario) => `http://localhost:3000/a
 
 exports.PUT_USUARIO_DECREMENTAR_ROTINA = (id_usuario) => `http://localhost:3000/api/usuarios/decrementar-rotina/${id_usuario}`
 
+exports.POST_TOKEN = () => `http://localhost:3000/api/token/`
+

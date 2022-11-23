@@ -8,16 +8,20 @@ import Home from './Home';
 import EditarUsuario from './EditarUsuario';
 import EditarRotina from '../components/editar-rotina/editarRotina';
 import PopupEditarRotina from '../components/editar-rotina/popupEditarRotina';
+import PrivateRoute from '../components/PrivateRoute';
 function App() {
   return(
     <BrowserRouter>
       <Routes>
-        <Route  path="/" element={<Home/>}/>
+      
+          <Route  path="/" element={
+            <PrivateRoute>
+              <Home />
+            </PrivateRoute>
+          }/>
+        
         <Route exact path='/login' element={<Login/>}/>
         <Route exact path='/editar/:id/*' element={<EditarUsuario/>}/>
-          
-        
-
       </Routes>
     </BrowserRouter>
     

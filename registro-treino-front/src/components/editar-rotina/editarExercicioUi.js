@@ -1,3 +1,5 @@
+import React from 'react';
+
 import cruz from '../../assets/cruz.png';
 import excluir_img from '../../assets/excluir-2.png';
 import salvar_img from '../../assets/salve-.png';

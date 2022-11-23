@@ -1,3 +1,5 @@
+import React from "react";
+
 import CardRotinaUi from "./cardRotinaUi";
 import OrdenacaoDias from "../../utils/ordenacaoDias";
 import EditarRotinaContext from './editarRotinaContext';

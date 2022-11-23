@@ -1,3 +1,5 @@
+import React from 'react';
+
 import requests from '../constants/requests';
 
 import useFetch from "../customHooks/useFetch";
@@ -26,13 +28,6 @@ const PesquisaForm = ({triggerGetUsuarios, nome, setNome,...props}) => {
     useEffect(() =>{
         console.log(error)
     },[error])
-
-/*     useEffect(() => {
-        console.log(`Nome: ${nome}`)
-        console.log(`Data antes da request: ${data}`)
-        request(requests.GET_USUARIO_BY_NOME(nome))
-
-    },[triggerGetUsuarios])  */
 
     useEffect(() => {
         console.log("Usuario for delete: " + idUsuarioForDelete)

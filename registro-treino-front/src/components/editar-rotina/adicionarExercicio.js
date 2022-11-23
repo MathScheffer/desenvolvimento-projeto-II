@@ -1,3 +1,5 @@
+import React from 'react';
+
 import requests from '../../constants/requests';
 import Utils from '../../utils/Utils';
 import AdicionarExercicioUi from "./adicionarFormExercicioUi";
