@@ -133,7 +133,7 @@ const PopupEditarRotina = ({setReload}) => {
             target == botaoFechar.current ){
             setModalAtivo(false);
             setFormsAddList([]);
-            navigate("/editar/" + params.id)
+            navigate("/usuario/" + params.id)
         }
     }
     
@@ -151,34 +151,23 @@ return(
             <div className="row">
                 {rotinaAtual.exercicios && rotinaAtual.exercicios.map( exercicio => {
                 return <EditarExercicio 
-                //parâmetro KEY é extremamente obrigatório passar para o react reconhecer
-                //as mudanças!
-                    key={exercicio._id}
-                    exercicio={exercicio} 
-                    setReloadPopup={setReloadPopup}
-                ></EditarExercicio>
-            })}
-                {
-                    formsAddList
+                        //parâmetro KEY é extremamente obrigatório passar para o react reconhecer
+                        //as mudanças!
+                            key={exercicio._id}
+                            exercicio={exercicio} 
+                            setReloadPopup={setReloadPopup}
+                        ></EditarExercicio>
+                    })
                 }
-                
-                <ActionAdicionar 
-                    isAddCard={isAddCard}
-                    setAddCard={setAddCard}
-                    cardType='card-adicionar-exercicio'
-                ></ActionAdicionar>
             </div>
 
             <div className="row">
                  <div className="popup-container-elements">
-                    <div className="grid-4">
+                    <div className="grid-6">
                         <button ref={botaoFechar}>Fechar</button>   
                     </div>
-                    <div className="grid-4">
+                    <div className="grid-6">
                         <button>Imprimir</button>   
-                    </div>
-                    <div className="grid-4">
-                        <button  onClick={apagarRotinaClick}>Excluir</button>   
                     </div>
                 </div>
             </div>

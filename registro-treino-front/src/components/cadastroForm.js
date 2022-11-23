@@ -3,6 +3,7 @@ import { useEffect, useRef, useState } from "react";
 import useFetch from "../customHooks/useFetch";
 import Mensagem from "./mensagem";
 import TratamentoErros from '../utils/tratamentoErros';
+import Utils from '../utils/Utils';
 
 const CadastroForm = ({setTriggerGetUsuarios, setNome, ...props}) => {
 
@@ -64,13 +65,15 @@ const CadastroForm = ({setTriggerGetUsuarios, setNome, ...props}) => {
         event.preventDefault();
         console.log(`Formulario enviado: ${JSON.stringify(form)}`);
 
-        const novoNome = form.nome + " " + form.sobrenome;
+        let novoNome = form.nome + " " + form.sobrenome;
+        novoNome = Utils.montarNomeUsuario(novoNome)
+        
         const senha = form.nome + "." + form.sobrenome;
         
 
         setForm((form) => {
             const novoForm = form
-            novoForm.senha = senha
+            novoForm.senha = senha.toLowerCase()
             novoForm.nome = novoNome
 
             return novoForm

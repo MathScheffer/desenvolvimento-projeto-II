@@ -13,21 +13,26 @@ const LoginFormUi = ({handleChange, onSubmit, usuario, senha, logar}) => {
                     <form className="loginForm" 
                     onSubmit={onSubmit}
                     >
-                        <input 
-                            id='usuario'
-                            name="usuario" 
-                            value={usuario}
-                            placeholder='usuario'
-                            onChange={handleChange}
-                        />
-                        <input 
-                            id='senha'
-                            name="senha" 
-                            value={senha}
-                            placeholder='senha'
-                            onChange={handleChange}    
-                        />
-
+                        <div className='input-container'>
+                            <label htmlFor="usuario">Usuario</label>
+                            <input 
+                                id='usuario'
+                                name="usuario" 
+                                value={usuario}
+                                placeholder='usuario'
+                                onChange={handleChange}
+                            />
+                        </div>
+                        <div className='input-container'>
+                            <label htmlFor="senha">Senha</label>
+                            <input 
+                                id='senha'
+                                name="senha" 
+                                value={senha}
+                                placeholder='senha'
+                                onChange={handleChange}    
+                            />
+                        </div>
                         <button onClick={logar}>Logar</button>
                     </form>
                 </div>

@@ -3,9 +3,12 @@ import LoginFormUi from '../components/loginFormUi';
 import useFetch from '../customHooks/useFetch';
 import Utils from '../utils/Utils';
 import requests from '../constants/requests'
+import JWT from 'jsonwebtoken';
+import { useNavigate } from 'react-router-dom';
 
 const Login = () => {
     const canLogin = useRef(false);
+    const navigate = useNavigate();
 
     const [loginTrigger, setLoginTrigger] = useState(0);
     const {data, loading, error, request} = useFetch()
@@ -16,7 +19,8 @@ const Login = () => {
 
     useEffect(() => {
         if(canLogin.current){
-            const body = Utils.imparChavesVazias(form);
+            let body = Utils.imparChavesVazias(form);
+            body.usuario = Utils.montarNomeUsuario(body.usuario)
 
             const options = {
                 'method':'POST',
@@ -34,6 +38,15 @@ const Login = () => {
         console.log(data)
         if(data && data.token){
             localStorage.setItem('token',data.token)
+
+            JWT.verify(data.token,'encryptor', (err, payload) => {
+                if(payload.role && payload.role.toUpperCase() === 'ADM') {
+                    navigate("/adm")
+                }else{
+                    navigate(`/usuario/${payload.id}`)
+                }
+            })
+            
         }
     }, [data])
 
