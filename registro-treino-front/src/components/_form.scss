@@ -65,7 +65,12 @@ input{
     border: none;
     border-radius: 4px;
 } 
-
+#login-form {
+    div.input-container{
+        display: flex;
+        flex-direction: column;
+    }
+}
 #login-form button{
     background: white;
     border: none;
