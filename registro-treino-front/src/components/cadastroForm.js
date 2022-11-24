@@ -116,7 +116,7 @@ const CadastroForm = ({setTriggerGetUsuarios, setNome, ...props}) => {
             }
             {data && mensagem && <Mensagem tipo='sucess' conteudo={mensagem} />}
             
-            <section id="pesquisa-form">
+            <section id="cadastro-form">
                 <h2>Cadastrar Aluno</h2>
 
                 <form onSubmit={handleSubmit} ref={formRef}>

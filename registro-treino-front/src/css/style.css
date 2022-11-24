@@ -306,24 +306,30 @@ input {
   width: 30%;
 }
 
-#pesquisa-form form {
+#pesquisa-form form, #cadastro-form form {
   display: flex;
   flex-direction: column;
 }
 
 #pesquisa-form button,
-#pesquisa-form a {
+#pesquisa-form a,
+#cadastro-form button,
+#cadastro-form a {
   width: 30%;
 }
 @media screen and (min-width: 800px) and (max-width: 1199px) {
   #pesquisa-form button,
-  #pesquisa-form a {
+  #pesquisa-form a,
+  #cadastro-form button,
+  #cadastro-form a {
     width: auto;
   }
 }
 @media screen and (max-width: 799px) {
   #pesquisa-form button,
-  #pesquisa-form a {
+  #pesquisa-form a,
+  #cadastro-form button,
+  #cadastro-form a {
     width: auto;
   }
 }
