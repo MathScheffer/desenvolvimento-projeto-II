@@ -1,10 +1,12 @@
-#pesquisa-form form{
+#pesquisa-form form, #cadastro-form form{
     display: flex;
     flex-direction: column;
 }
 
 #pesquisa-form button,
-#pesquisa-form a{
+#pesquisa-form a,
+#cadastro-form button,
+#cadastro-form a{
     width: 30%;
 
     @include d(m) {

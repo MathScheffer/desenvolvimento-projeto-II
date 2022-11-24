@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot generator="Robot 5.0.1 (Python 3.9.1 on win32)" generated="20221124 19:57:49.436" rpa="false" schemaversion="3">
+<suite id="s1" name="Valid Login" source="C:\Users\matheus.scheffer\Documents\projeto-desenvolvimento-II\Testes-Aceite\login_tests\valid_login.robot">
+<kw name="Open Browser To Login Page" library="resource" type="SETUP">
+<kw name="Open Browser" library="SeleniumLibrary">
+<arg>${LOGIN URL}</arg>
+<arg>${BROWSER}</arg>
+<doc>Opens a new browser instance to the optional ``url``.</doc>
+<msg timestamp="20221124 19:57:49.710" level="INFO">Opening browser 'chrome' to base url 'http://localhost:3001/login'.</msg>
+<status status="PASS" starttime="20221124 19:57:49.710" endtime="20221124 19:57:51.762"/>
+</kw>
+<kw name="Maximize Browser Window" library="SeleniumLibrary">
+<doc>Maximizes current browser window.</doc>
+<status status="PASS" starttime="20221124 19:57:51.763" endtime="20221124 19:57:51.885"/>
+</kw>
+<kw name="Set Selenium Speed" library="SeleniumLibrary">
+<arg>${DELAY}</arg>
+<doc>Sets the delay that is waited after each Selenium command.</doc>
+<status status="PASS" starttime="20221124 19:57:51.885" endtime="20221124 19:57:51.886"/>
+</kw>
+<kw name="Login Page Should Be Open" library="resource">
+<kw name="Title Should Be" library="SeleniumLibrary">
+<arg>Login</arg>
+<doc>Verifies that the current page title equals ``title``.</doc>
+<msg timestamp="20221124 19:57:52.305" level="INFO">Page title is 'Login'.</msg>
+<status status="PASS" starttime="20221124 19:57:51.887" endtime="20221124 19:57:52.305"/>
+</kw>
+<status status="PASS" starttime="20221124 19:57:51.887" endtime="20221124 19:57:52.305"/>
+</kw>
+<status status="PASS" starttime="20221124 19:57:49.709" endtime="20221124 19:57:52.305"/>
+</kw>
+<test id="s1-t1" name="Test Valid Login Page" line="10">
+<kw name="Go to Login page" library="resource" type="SETUP">
+<kw name="Go To" library="SeleniumLibrary">
+<arg>${LOGIN URL}</arg>
+<doc>Navigates the current browser window to the provided ``url``.</doc>
+<msg timestamp="20221124 19:57:52.307" level="INFO">Opening url 'http://localhost:3001/login'</msg>
+<status status="PASS" starttime="20221124 19:57:52.307" endtime="20221124 19:57:52.821"/>
+</kw>
+<status status="PASS" starttime="20221124 19:57:52.306" endtime="20221124 19:57:52.821"/>
+</kw>
+<kw name="Given browser is opened to login page">
+<kw name="Login Page Should Be Open" library="resource">
+<kw name="Title Should Be" library="SeleniumLibrary">
+<arg>Login</arg>
+<doc>Verifies that the current page title equals ``title``.</doc>
+<msg timestamp="20221124 19:57:53.231" level="INFO">Page title is 'Login'.</msg>
+<status status="PASS" starttime="20221124 19:57:52.823" endtime="20221124 19:57:53.231"/>
+</kw>
+<status status="PASS" starttime="20221124 19:57:52.823" endtime="20221124 19:57:53.231"/>
+</kw>
+<status status="PASS" starttime="20221124 19:57:52.822" endtime="20221124 19:57:53.231"/>
+</kw>
+<kw name="When user &quot;${LOGIN ADM}&quot; logs in with password &quot;${PASSWORD ADM}&quot;" sourcename="User &quot;${username}&quot; logs in with password &quot;${password}&quot;">
+<kw name="Input User Name" library="resource">
+<arg>${username}</arg>
+<kw name="Input Text" library="SeleniumLibrary">
+<arg>usuario</arg>
+<arg>${username}</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<msg timestamp="20221124 19:57:53.233" level="INFO">Typing text 'Matheus Scheffer' into text field 'usuario'.</msg>
+<status status="PASS" starttime="20221124 19:57:53.233" endtime="20221124 19:57:54.584"/>
+</kw>
+<status status="PASS" starttime="20221124 19:57:53.233" endtime="20221124 19:57:54.584"/>
+</kw>
+<kw name="Input Password" library="resource">
+<arg>${password}</arg>
+<kw name="Input Text" library="SeleniumLibrary">
+<arg>senha</arg>
+<arg>${password}</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<msg timestamp="20221124 19:57:54.585" level="INFO">Typing text '123' into text field 'senha'.</msg>
+<status status="PASS" starttime="20221124 19:57:54.585" endtime="20221124 19:57:55.911"/>
+</kw>
+<status status="PASS" starttime="20221124 19:57:54.584" endtime="20221124 19:57:55.911"/>
+</kw>
+<kw name="Submit Credentials" library="resource">
+<kw name="Click Element" library="SeleniumLibrary">
+<arg>//button[contains(text(),'Logar')]</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<msg timestamp="20221124 19:57:55.912" level="INFO">Clicking element '//button[contains(text(),'Logar')]'.</msg>
+<status status="PASS" starttime="20221124 19:57:55.911" endtime="20221124 19:57:56.775"/>
+</kw>
+<status status="PASS" starttime="20221124 19:57:55.911" endtime="20221124 19:57:56.775"/>
+</kw>
+<status status="PASS" starttime="20221124 19:57:53.232" endtime="20221124 19:57:56.775"/>
+</kw>
+<kw name="Then user Should Be Logged" library="resource">
+<kw name="Wait Until Element Is Not Visible" library="SeleniumLibrary">
+<arg>//h1[contains(text(),'Bem Vindo')]</arg>
+<doc>Waits until the element ``locator`` is not visible.</doc>
+<status status="PASS" starttime="20221124 19:57:56.777" endtime="20221124 19:57:57.200"/>
+</kw>
+<kw name="Location Should Be" library="SeleniumLibrary">
+<arg>${LOGGED URL ADM}</arg>
+<doc>Verifies that the current URL is exactly ``url``.</doc>
+<msg timestamp="20221124 19:57:57.609" level="INFO">Current location is 'http://localhost:3001/adm'.</msg>
+<status status="PASS" starttime="20221124 19:57:57.200" endtime="20221124 19:57:57.609"/>
+</kw>
+<status status="PASS" starttime="20221124 19:57:56.776" endtime="20221124 19:57:57.609"/>
+</kw>
+<status status="PASS" starttime="20221124 19:57:52.306" endtime="20221124 19:57:57.610"/>
+</test>
+<kw name="Close Browser" library="SeleniumLibrary" type="TEARDOWN">
+<doc>Closes the current browser.</doc>
+<status status="PASS" starttime="20221124 19:57:57.612" endtime="20221124 19:58:00.178"/>
+</kw>
+<status status="PASS" starttime="20221124 19:57:49.438" endtime="20221124 19:58:00.178"/>
+</suite>
+<statistics>
+<total>
+<stat pass="1" fail="0" skip="0">All Tests</stat>
+</total>
+<tag>
+</tag>
+<suite>
+<stat pass="1" fail="0" skip="0" id="s1" name="Valid Login">Valid Login</stat>
+</suite>
+</statistics>
+<errors>
+<msg timestamp="20221124 19:57:49.707" level="WARN">Imported library 'C:\Users\matheus.scheffer\Documents\projeto-desenvolvimento-II\Testes-Aceite\lib\CustomLibraryTests.py' contains no keywords.</msg>
+</errors>
+</robot>
