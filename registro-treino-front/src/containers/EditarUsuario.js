@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
+import { Helmet } from "react-helmet";
 import { Outlet, Route, Routes, useParams } from "react-router-dom";
 import EditarRotina from "../components/editar-rotina/editarRotina";
 import PopupEditarRotina from "../components/editar-rotina/popupEditarRotina";
@@ -39,6 +40,12 @@ const EditarUsuario = () => {
     return(
         
         <>
+        <Helmet>
+            <meta charset="UTF-8" />
+            <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+            <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+            <title>Editar Usuario</title>
+        </Helmet>
         <section className="container">
             <div className="row"><Header /></div>
             {usuario &&

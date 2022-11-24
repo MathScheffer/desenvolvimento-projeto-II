@@ -5,6 +5,7 @@ import Utils from '../utils/Utils';
 import requests from '../constants/requests'
 import JWT from 'jsonwebtoken';
 import { useNavigate } from 'react-router-dom';
+import { Helmet } from 'react-helmet';
 
 const Login = () => {
     const canLogin = useRef(false);
@@ -74,13 +75,22 @@ const Login = () => {
     }
 
     return (
-        <LoginFormUi
-            handleChange={handleChange}
-            onSubmit={onSubmit}
-            usuario={form.usuario}
-            senha={form.senha}
-            logar={logar}
-        ></LoginFormUi>
+        <>
+            <Helmet>
+                <meta charset="UTF-8" />
+                <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+                <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+                <title>Login</title>
+            </Helmet>
+
+            <LoginFormUi
+                handleChange={handleChange}
+                onSubmit={onSubmit}
+                usuario={form.usuario}
+                senha={form.senha}
+                logar={logar}
+            ></LoginFormUi>
+        </>
     )
 }
 

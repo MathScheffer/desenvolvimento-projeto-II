@@ -3,7 +3,7 @@ import React from 'react'
 import { useEffect, useState } from 'react'; */
 import Login from './Login';
 
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, Navigate, } from 'react-router-dom';
 import HomeAdm from './HomeAdm';
 import EditarUsuario from './EditarUsuario';
 import EditarRotina from '../components/editar-rotina/editarRotina';
@@ -13,31 +13,36 @@ import HomeUsuario from './HomeUsuario';
 function App() {
   return(
     <BrowserRouter>
-      <Routes>
       
-        <Route  
-            path="/adm" 
+        <Routes>
+          <Route 
+            path="/"
+            element={<Navigate to='/login'/>}
+          />
+          <Route  
+              path="/adm" 
+              element={
+                <PrivateRoute role='ADM'>
+                  <HomeAdm />
+                </PrivateRoute>
+              }
+          />
+          <Route 
+            path='/usuario/:id/*'
             element={
-              <PrivateRoute role='ADM'>
-                <HomeAdm />
+              <PrivateRoute role='USER'>
+                <HomeUsuario/>
               </PrivateRoute>
             }
-        />
-        <Route 
-          path='/usuario/:id/*'
-          element={
-            <PrivateRoute role='USER'>
-              <HomeUsuario/>
+          />
+          <Route exact path='/login' element={<Login/>}/>
+          <Route exact path='/editar/:id/*' element={
+            <PrivateRoute role='ADM'>
+                <EditarUsuario/>
             </PrivateRoute>
-          }
-        />
-        <Route exact path='/login' element={<Login/>}/>
-        <Route exact path='/editar/:id/*' element={
-          <PrivateRoute role='ADM'>
-              <EditarUsuario/>
-          </PrivateRoute>
-        }/>
-      </Routes>
+          }/>
+          
+        </Routes>
     </BrowserRouter>
     
   )

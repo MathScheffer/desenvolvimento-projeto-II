@@ -6,6 +6,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import useFetch from "../../customHooks/useFetch";
 
 import requests from '../../constants/requests';
+import { Helmet } from "react-helmet";
 
 const PopupEditarRotina = ({setReload}) => {
     const navigate = useNavigate();
@@ -50,6 +51,12 @@ const PopupEditarRotina = ({setReload}) => {
     
 return(
     <>
+    <Helmet>
+    <meta charset="UTF-8" />
+            <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+            <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+            <title>Editar Treino - Usuario</title>
+    </Helmet>
     {(modalAtivo && rotinaAtual) && 
     <section id='modal-editar'  onClick={fecharModal} ref={modalContainer}> 
         <div className="container">
