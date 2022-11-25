@@ -1,55 +1,46 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<robot generator="Robot 5.0.1 (Python 3.9.1 on win32)" generated="20221124 19:57:49.436" rpa="false" schemaversion="3">
-<suite id="s1" name="Valid Login" source="C:\Users\matheus.scheffer\Documents\projeto-desenvolvimento-II\Testes-Aceite\login_tests\valid_login.robot">
+<robot generator="Robot 5.0.1 (Python 3.9.1 on win32)" generated="20221125 00:50:54.961" rpa="false" schemaversion="3">
+<suite id="s1" name="Test Cases" source="C:\Users\matheus.scheffer\Documents\projeto-desenvolvimento-II\Testes-Aceite\tests\test_cases.robot">
 <kw name="Open Browser To Login Page" library="resource" type="SETUP">
 <kw name="Open Browser" library="SeleniumLibrary">
 <arg>${LOGIN URL}</arg>
 <arg>${BROWSER}</arg>
 <doc>Opens a new browser instance to the optional ``url``.</doc>
-<msg timestamp="20221124 19:57:49.710" level="INFO">Opening browser 'chrome' to base url 'http://localhost:3001/login'.</msg>
-<status status="PASS" starttime="20221124 19:57:49.710" endtime="20221124 19:57:51.762"/>
+<msg timestamp="20221125 00:50:55.334" level="INFO">Opening browser 'chrome' to base url 'http://localhost:3001/login'.</msg>
+<status status="PASS" starttime="20221125 00:50:55.334" endtime="20221125 00:50:57.597"/>
 </kw>
 <kw name="Maximize Browser Window" library="SeleniumLibrary">
 <doc>Maximizes current browser window.</doc>
-<status status="PASS" starttime="20221124 19:57:51.763" endtime="20221124 19:57:51.885"/>
+<status status="PASS" starttime="20221125 00:50:57.597" endtime="20221125 00:50:57.724"/>
 </kw>
 <kw name="Set Selenium Speed" library="SeleniumLibrary">
 <arg>${DELAY}</arg>
 <doc>Sets the delay that is waited after each Selenium command.</doc>
-<status status="PASS" starttime="20221124 19:57:51.885" endtime="20221124 19:57:51.886"/>
+<status status="PASS" starttime="20221125 00:50:57.724" endtime="20221125 00:50:57.725"/>
 </kw>
 <kw name="Login Page Should Be Open" library="resource">
 <kw name="Title Should Be" library="SeleniumLibrary">
 <arg>Login</arg>
 <doc>Verifies that the current page title equals ``title``.</doc>
-<msg timestamp="20221124 19:57:52.305" level="INFO">Page title is 'Login'.</msg>
-<status status="PASS" starttime="20221124 19:57:51.887" endtime="20221124 19:57:52.305"/>
+<msg timestamp="20221125 00:50:58.035" level="INFO">Page title is 'Login'.</msg>
+<status status="PASS" starttime="20221125 00:50:57.726" endtime="20221125 00:50:58.035"/>
 </kw>
-<status status="PASS" starttime="20221124 19:57:51.887" endtime="20221124 19:57:52.305"/>
+<status status="PASS" starttime="20221125 00:50:57.725" endtime="20221125 00:50:58.035"/>
 </kw>
-<status status="PASS" starttime="20221124 19:57:49.709" endtime="20221124 19:57:52.305"/>
+<status status="PASS" starttime="20221125 00:50:55.333" endtime="20221125 00:50:58.035"/>
 </kw>
-<test id="s1-t1" name="Test Valid Login Page" line="10">
-<kw name="Go to Login page" library="resource" type="SETUP">
-<kw name="Go To" library="SeleniumLibrary">
-<arg>${LOGIN URL}</arg>
-<doc>Navigates the current browser window to the provided ``url``.</doc>
-<msg timestamp="20221124 19:57:52.307" level="INFO">Opening url 'http://localhost:3001/login'</msg>
-<status status="PASS" starttime="20221124 19:57:52.307" endtime="20221124 19:57:52.821"/>
-</kw>
-<status status="PASS" starttime="20221124 19:57:52.306" endtime="20221124 19:57:52.821"/>
-</kw>
+<test id="s1-t1" name="Test Create User" line="10">
 <kw name="Given browser is opened to login page">
 <kw name="Login Page Should Be Open" library="resource">
 <kw name="Title Should Be" library="SeleniumLibrary">
 <arg>Login</arg>
 <doc>Verifies that the current page title equals ``title``.</doc>
-<msg timestamp="20221124 19:57:53.231" level="INFO">Page title is 'Login'.</msg>
-<status status="PASS" starttime="20221124 19:57:52.823" endtime="20221124 19:57:53.231"/>
+<msg timestamp="20221125 00:50:58.348" level="INFO">Page title is 'Login'.</msg>
+<status status="PASS" starttime="20221125 00:50:58.038" endtime="20221125 00:50:58.348"/>
 </kw>
-<status status="PASS" starttime="20221124 19:57:52.823" endtime="20221124 19:57:53.231"/>
+<status status="PASS" starttime="20221125 00:50:58.038" endtime="20221125 00:50:58.348"/>
 </kw>
-<status status="PASS" starttime="20221124 19:57:52.822" endtime="20221124 19:57:53.231"/>
+<status status="PASS" starttime="20221125 00:50:58.037" endtime="20221125 00:50:58.348"/>
 </kw>
 <kw name="When user &quot;${LOGIN ADM}&quot; logs in with password &quot;${PASSWORD ADM}&quot;" sourcename="User &quot;${username}&quot; logs in with password &quot;${password}&quot;">
 <kw name="Input User Name" library="resource">
@@ -58,10 +49,10 @@
 <arg>usuario</arg>
 <arg>${username}</arg>
 <doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
-<msg timestamp="20221124 19:57:53.233" level="INFO">Typing text 'Matheus Scheffer' into text field 'usuario'.</msg>
-<status status="PASS" starttime="20221124 19:57:53.233" endtime="20221124 19:57:54.584"/>
+<msg timestamp="20221125 00:50:58.351" level="INFO">Typing text 'Matheus Scheffer' into text field 'usuario'.</msg>
+<status status="PASS" starttime="20221125 00:50:58.351" endtime="20221125 00:50:59.411"/>
 </kw>
-<status status="PASS" starttime="20221124 19:57:53.233" endtime="20221124 19:57:54.584"/>
+<status status="PASS" starttime="20221125 00:50:58.350" endtime="20221125 00:50:59.411"/>
 </kw>
 <kw name="Input Password" library="resource">
 <arg>${password}</arg>
@@ -69,55 +60,576 @@
 <arg>senha</arg>
 <arg>${password}</arg>
 <doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
-<msg timestamp="20221124 19:57:54.585" level="INFO">Typing text '123' into text field 'senha'.</msg>
-<status status="PASS" starttime="20221124 19:57:54.585" endtime="20221124 19:57:55.911"/>
+<msg timestamp="20221125 00:50:59.412" level="INFO">Typing text '123' into text field 'senha'.</msg>
+<status status="PASS" starttime="20221125 00:50:59.412" endtime="20221125 00:51:00.425"/>
 </kw>
-<status status="PASS" starttime="20221124 19:57:54.584" endtime="20221124 19:57:55.911"/>
+<status status="PASS" starttime="20221125 00:50:59.411" endtime="20221125 00:51:00.426"/>
 </kw>
 <kw name="Submit Credentials" library="resource">
+<arg>Logar</arg>
 <kw name="Click Element" library="SeleniumLibrary">
-<arg>//button[contains(text(),'Logar')]</arg>
+<arg>//button[contains(text(),'${text}')]</arg>
 <doc>Click the element identified by ``locator``.</doc>
-<msg timestamp="20221124 19:57:55.912" level="INFO">Clicking element '//button[contains(text(),'Logar')]'.</msg>
-<status status="PASS" starttime="20221124 19:57:55.911" endtime="20221124 19:57:56.775"/>
+<msg timestamp="20221125 00:51:00.427" level="INFO">Clicking element '//button[contains(text(),'Logar')]'.</msg>
+<status status="PASS" starttime="20221125 00:51:00.426" endtime="20221125 00:51:01.094"/>
 </kw>
-<status status="PASS" starttime="20221124 19:57:55.911" endtime="20221124 19:57:56.775"/>
+<status status="PASS" starttime="20221125 00:51:00.426" endtime="20221125 00:51:01.094"/>
 </kw>
-<status status="PASS" starttime="20221124 19:57:53.232" endtime="20221124 19:57:56.775"/>
+<status status="PASS" starttime="20221125 00:50:58.349" endtime="20221125 00:51:01.094"/>
 </kw>
-<kw name="Then user Should Be Logged" library="resource">
+<kw name="Then Create User">
+<kw name="Write On Input Cadastro" library="resource">
+<arg>nome</arg>
+<arg>Usuario</arg>
+<kw name="Write Text Input Cadastro" library="CustomLibraryTests">
+<arg>${id}</arg>
+<arg>${text}</arg>
+<status status="PASS" starttime="20221125 00:51:01.096" endtime="20221125 00:51:01.802"/>
+</kw>
+<status status="PASS" starttime="20221125 00:51:01.096" endtime="20221125 00:51:01.802"/>
+</kw>
+<kw name="Write On Input Cadastro" library="resource">
+<arg>sobrenome</arg>
+<arg>Teste</arg>
+<kw name="Write Text Input Cadastro" library="CustomLibraryTests">
+<arg>${id}</arg>
+<arg>${text}</arg>
+<status status="PASS" starttime="20221125 00:51:01.802" endtime="20221125 00:51:02.501"/>
+</kw>
+<status status="PASS" starttime="20221125 00:51:01.802" endtime="20221125 00:51:02.501"/>
+</kw>
+<kw name="Write On Input Cadastro" library="resource">
+<arg>idade</arg>
+<arg>26</arg>
+<kw name="Write Text Input Cadastro" library="CustomLibraryTests">
+<arg>${id}</arg>
+<arg>${text}</arg>
+<status status="PASS" starttime="20221125 00:51:02.501" endtime="20221125 00:51:03.172"/>
+</kw>
+<status status="PASS" starttime="20221125 00:51:02.501" endtime="20221125 00:51:03.172"/>
+</kw>
+<kw name="Write On Input Cadastro" library="resource">
+<arg>peso</arg>
+<arg>80</arg>
+<kw name="Write Text Input Cadastro" library="CustomLibraryTests">
+<arg>${id}</arg>
+<arg>${text}</arg>
+<status status="PASS" starttime="20221125 00:51:03.173" endtime="20221125 00:51:03.851"/>
+</kw>
+<status status="PASS" starttime="20221125 00:51:03.172" endtime="20221125 00:51:03.851"/>
+</kw>
+<kw name="Write On Input Cadastro" library="resource">
+<arg>objetivo</arg>
+<arg>ganho</arg>
+<kw name="Write Text Input Cadastro" library="CustomLibraryTests">
+<arg>${id}</arg>
+<arg>${text}</arg>
+<status status="PASS" starttime="20221125 00:51:03.852" endtime="20221125 00:51:04.544"/>
+</kw>
+<status status="PASS" starttime="20221125 00:51:03.851" endtime="20221125 00:51:04.544"/>
+</kw>
+<kw name="Write On Input Cadastro" library="resource">
+<arg>whatsapp</arg>
+<arg>997856303</arg>
+<kw name="Write Text Input Cadastro" library="CustomLibraryTests">
+<arg>${id}</arg>
+<arg>${text}</arg>
+<status status="PASS" starttime="20221125 00:51:04.545" endtime="20221125 00:51:05.244"/>
+</kw>
+<status status="PASS" starttime="20221125 00:51:04.544" endtime="20221125 00:51:05.244"/>
+</kw>
+<kw name="Write On Input Cadastro" library="resource">
+<arg>role</arg>
+<arg>USER</arg>
+<kw name="Write Text Input Cadastro" library="CustomLibraryTests">
+<arg>${id}</arg>
+<arg>${text}</arg>
+<status status="PASS" starttime="20221125 00:51:05.245" endtime="20221125 00:51:05.918"/>
+</kw>
+<status status="PASS" starttime="20221125 00:51:05.244" endtime="20221125 00:51:05.918"/>
+</kw>
+<kw name="Submit Credentials" library="resource">
+<arg>Cadastrar</arg>
+<kw name="Click Element" library="SeleniumLibrary">
+<arg>//button[contains(text(),'${text}')]</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<msg timestamp="20221125 00:51:05.919" level="INFO">Clicking element '//button[contains(text(),'Cadastrar')]'.</msg>
+<status status="PASS" starttime="20221125 00:51:05.919" endtime="20221125 00:51:06.595"/>
+</kw>
+<status status="PASS" starttime="20221125 00:51:05.918" endtime="20221125 00:51:06.595"/>
+</kw>
+<status status="PASS" starttime="20221125 00:51:01.095" endtime="20221125 00:51:06.595"/>
+</kw>
+<kw name="Verify Success Message" library="resource">
+<kw name="Wait Until Element Is Visible" library="SeleniumLibrary">
+<arg>//section[contains(@class,'sucess')]</arg>
+<arg>2</arg>
+<doc>Waits until the element ``locator`` is visible.</doc>
+<status status="PASS" starttime="20221125 00:51:06.596" endtime="20221125 00:51:07.239"/>
+</kw>
+<status status="PASS" starttime="20221125 00:51:06.596" endtime="20221125 00:51:07.239"/>
+</kw>
+<kw name="And add rotina">
+<kw name="Click On Editar" library="resource">
+<arg>Usuario Teste</arg>
+<kw name="Click On Editar Button" library="CustomLibraryTests">
+<arg>${username}</arg>
+<status status="PASS" starttime="20221125 00:51:07.241" endtime="20221125 00:51:07.924"/>
+</kw>
+<status status="PASS" starttime="20221125 00:51:07.241" endtime="20221125 00:51:07.924"/>
+</kw>
+<kw name="Wait Until Element Is Visible" library="SeleniumLibrary">
+<arg>//div[contains(@class,'card-adicionar-rotina')]</arg>
+<doc>Waits until the element ``locator`` is visible.</doc>
+<status status="PASS" starttime="20221125 00:51:07.925" endtime="20221125 00:51:08.563"/>
+</kw>
+<kw name="Add Rotina Card" library="resource">
+<arg>Segunda</arg>
+<kw name="Click Card Add Rotina" library="CustomLibraryTests">
+<status status="PASS" starttime="20221125 00:51:08.563" endtime="20221125 00:51:09.220"/>
+</kw>
+<kw name="Input Text" library="SeleniumLibrary">
+<arg>dia</arg>
+<arg>${dia}</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<msg timestamp="20221125 00:51:09.221" level="INFO">Typing text 'Segunda' into text field 'dia'.</msg>
+<status status="PASS" starttime="20221125 00:51:09.220" endtime="20221125 00:51:10.220"/>
+</kw>
+<kw name="Click Button By Text" library="CustomLibraryTests">
+<arg>Salvar</arg>
+<status status="PASS" starttime="20221125 00:51:10.220" endtime="20221125 00:51:10.886"/>
+</kw>
+<kw name="Wait Until Element Is Visible" library="SeleniumLibrary">
+<arg>//div[@class='card-rotina-container']//a[contains(text(),'${dia}')]</arg>
+<arg>2</arg>
+<doc>Waits until the element ``locator`` is visible.</doc>
+<status status="PASS" starttime="20221125 00:51:10.886" endtime="20221125 00:51:11.521"/>
+</kw>
+<status status="PASS" starttime="20221125 00:51:08.563" endtime="20221125 00:51:11.521"/>
+</kw>
+<kw name="Click Rotina" library="CustomLibraryTests">
+<arg>Segunda</arg>
+<status status="PASS" starttime="20221125 00:51:11.521" endtime="20221125 00:51:12.183"/>
+</kw>
+<kw name="Wait Until Element Is Visible" library="SeleniumLibrary">
+<arg>//section[@id='modal-editar']</arg>
+<arg>2</arg>
+<doc>Waits until the element ``locator`` is visible.</doc>
+<status status="PASS" starttime="20221125 00:51:12.183" endtime="20221125 00:51:12.831"/>
+</kw>
+<kw name="Add Treino" library="resource">
+<arg>Rosca Direta</arg>
+<arg>0</arg>
+<arg>4</arg>
+<arg>12</arg>
+<kw name="Wait Until Element Is Visible" library="SeleniumLibrary">
+<arg>//div[@class='card-adicionar-exercicio']</arg>
+<doc>Waits until the element ``locator`` is visible.</doc>
+<status status="PASS" starttime="20221125 00:51:12.832" endtime="20221125 00:51:13.475"/>
+</kw>
+<kw name="Click Add Exercicio" library="CustomLibraryTests">
+<status status="PASS" starttime="20221125 00:51:13.475" endtime="20221125 00:51:14.139"/>
+</kw>
+<kw name="Write Nome Exercicio" library="CustomLibraryTests">
+<arg>${nome}</arg>
+<arg>${index}</arg>
+<status status="PASS" starttime="20221125 00:51:14.139" endtime="20221125 00:51:14.847"/>
+</kw>
+<kw name="Write Input Exercicio" library="CustomLibraryTests">
+<arg>series</arg>
+<arg>${serie}</arg>
+<status status="PASS" starttime="20221125 00:51:14.847" endtime="20221125 00:51:15.520"/>
+</kw>
+<kw name="Write Input Exercicio" library="CustomLibraryTests">
+<arg>repeticoes</arg>
+<arg>${repeticoes}</arg>
+<status status="PASS" starttime="20221125 00:51:15.521" endtime="20221125 00:51:16.200"/>
+</kw>
+<kw name="Click Button By Text And Index" library="CustomLibraryTests">
+<arg>Salvar</arg>
+<arg>${index}</arg>
+<status status="PASS" starttime="20221125 00:51:16.200" endtime="20221125 00:51:16.860"/>
+</kw>
+<status status="PASS" starttime="20221125 00:51:12.831" endtime="20221125 00:51:16.860"/>
+</kw>
+<kw name="Add Treino" library="resource">
+<arg>Rosca Concentrada</arg>
+<arg>1</arg>
+<arg>4</arg>
+<arg>12</arg>
+<kw name="Wait Until Element Is Visible" library="SeleniumLibrary">
+<arg>//div[@class='card-adicionar-exercicio']</arg>
+<doc>Waits until the element ``locator`` is visible.</doc>
+<status status="PASS" starttime="20221125 00:51:16.860" endtime="20221125 00:51:17.486"/>
+</kw>
+<kw name="Click Add Exercicio" library="CustomLibraryTests">
+<status status="PASS" starttime="20221125 00:51:17.486" endtime="20221125 00:51:18.128"/>
+</kw>
+<kw name="Write Nome Exercicio" library="CustomLibraryTests">
+<arg>${nome}</arg>
+<arg>${index}</arg>
+<status status="PASS" starttime="20221125 00:51:18.128" endtime="20221125 00:51:18.833"/>
+</kw>
+<kw name="Write Input Exercicio" library="CustomLibraryTests">
+<arg>series</arg>
+<arg>${serie}</arg>
+<status status="PASS" starttime="20221125 00:51:18.833" endtime="20221125 00:51:19.495"/>
+</kw>
+<kw name="Write Input Exercicio" library="CustomLibraryTests">
+<arg>repeticoes</arg>
+<arg>${repeticoes}</arg>
+<status status="PASS" starttime="20221125 00:51:19.495" endtime="20221125 00:51:20.173"/>
+</kw>
+<kw name="Click Button By Text And Index" library="CustomLibraryTests">
+<arg>Salvar</arg>
+<arg>${index}</arg>
+<status status="PASS" starttime="20221125 00:51:20.173" endtime="20221125 00:51:20.834"/>
+</kw>
+<status status="PASS" starttime="20221125 00:51:16.860" endtime="20221125 00:51:20.834"/>
+</kw>
+<kw name="Click Button By Text" library="CustomLibraryTests">
+<arg>Fechar</arg>
+<status status="PASS" starttime="20221125 00:51:20.834" endtime="20221125 00:51:21.490"/>
+</kw>
+<kw name="Title Should Be" library="SeleniumLibrary">
+<arg>Editar Usuario</arg>
+<doc>Verifies that the current page title equals ``title``.</doc>
+<msg timestamp="20221125 00:51:21.804" level="INFO">Page title is 'Editar Usuario'.</msg>
+<status status="PASS" starttime="20221125 00:51:21.490" endtime="20221125 00:51:21.804"/>
+</kw>
+<status status="PASS" starttime="20221125 00:51:07.240" endtime="20221125 00:51:21.804"/>
+</kw>
+<kw name="Logoff" library="resource" type="TEARDOWN">
+<kw name="Click Button By Text" library="CustomLibraryTests">
+<arg>Sair</arg>
+<status status="PASS" starttime="20221125 00:51:21.806" endtime="20221125 00:51:22.477"/>
+</kw>
+<status status="PASS" starttime="20221125 00:51:21.806" endtime="20221125 00:51:22.477"/>
+</kw>
+<status status="PASS" starttime="20221125 00:50:58.036" endtime="20221125 00:51:22.478"/>
+</test>
+<test id="s1-t2" name="Test User Verify Routine" line="17">
+<kw name="Given browser is opened to login page">
+<kw name="Login Page Should Be Open" library="resource">
+<kw name="Title Should Be" library="SeleniumLibrary">
+<arg>Login</arg>
+<doc>Verifies that the current page title equals ``title``.</doc>
+<msg timestamp="20221125 00:51:22.804" level="INFO">Page title is 'Login'.</msg>
+<status status="PASS" starttime="20221125 00:51:22.482" endtime="20221125 00:51:22.804"/>
+</kw>
+<status status="PASS" starttime="20221125 00:51:22.482" endtime="20221125 00:51:22.804"/>
+</kw>
+<status status="PASS" starttime="20221125 00:51:22.481" endtime="20221125 00:51:22.804"/>
+</kw>
+<kw name="When user &quot;${LOGIN USER}&quot; logs in with password &quot;${PASSWORD USER}&quot;" sourcename="User &quot;${username}&quot; logs in with password &quot;${password}&quot;">
+<kw name="Input User Name" library="resource">
+<arg>${username}</arg>
+<kw name="Input Text" library="SeleniumLibrary">
+<arg>usuario</arg>
+<arg>${username}</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<msg timestamp="20221125 00:51:22.806" level="INFO">Typing text 'Usuario Teste' into text field 'usuario'.</msg>
+<status status="PASS" starttime="20221125 00:51:22.806" endtime="20221125 00:51:23.824"/>
+</kw>
+<status status="PASS" starttime="20221125 00:51:22.806" endtime="20221125 00:51:23.824"/>
+</kw>
+<kw name="Input Password" library="resource">
+<arg>${password}</arg>
+<kw name="Input Text" library="SeleniumLibrary">
+<arg>senha</arg>
+<arg>${password}</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<msg timestamp="20221125 00:51:23.824" level="INFO">Typing text 'usuario.teste' into text field 'senha'.</msg>
+<status status="PASS" starttime="20221125 00:51:23.824" endtime="20221125 00:51:24.858"/>
+</kw>
+<status status="PASS" starttime="20221125 00:51:23.824" endtime="20221125 00:51:24.858"/>
+</kw>
+<kw name="Submit Credentials" library="resource">
+<arg>Logar</arg>
+<kw name="Click Element" library="SeleniumLibrary">
+<arg>//button[contains(text(),'${text}')]</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<msg timestamp="20221125 00:51:24.859" level="INFO">Clicking element '//button[contains(text(),'Logar')]'.</msg>
+<status status="PASS" starttime="20221125 00:51:24.859" endtime="20221125 00:51:25.518"/>
+</kw>
+<status status="PASS" starttime="20221125 00:51:24.858" endtime="20221125 00:51:25.519"/>
+</kw>
+<status status="PASS" starttime="20221125 00:51:22.805" endtime="20221125 00:51:25.519"/>
+</kw>
+<kw name="And select routine Segunda" sourcename="Select Routine ${dia}">
+<kw name="Click Element" library="SeleniumLibrary">
+<arg>//div[contains(@class,'card-rotina-container')]//a[text()='${dia}']</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<msg timestamp="20221125 00:51:25.521" level="INFO">Clicking element '//div[contains(@class,'card-rotina-container')]//a[text()='Segunda']'.</msg>
+<status status="PASS" starttime="20221125 00:51:25.520" endtime="20221125 00:51:26.206"/>
+</kw>
+<status status="PASS" starttime="20221125 00:51:25.520" endtime="20221125 00:51:26.206"/>
+</kw>
+<kw name="Then edit field carga Of Exercise Rosca Direta With Value 10" sourcename="Edit Field ${campo} Of Exercise ${nome} With Value ${valor}">
+<kw name="Type Edit Input" library="resource">
+<arg>${nome}</arg>
+<arg>${campo}</arg>
+<arg>${valor}</arg>
+<kw name="Input Text" library="SeleniumLibrary">
+<arg>//textarea[contains(text(),'${nome}')]/..//input[@id='${atributo}']</arg>
+<arg>${valor}</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<msg timestamp="20221125 00:51:26.209" level="INFO">Typing text '10' into text field '//textarea[contains(text(),'Rosca Direta')]/..//input[@id='carga']'.</msg>
+<status status="PASS" starttime="20221125 00:51:26.209" endtime="20221125 00:51:27.224"/>
+</kw>
+<status status="PASS" starttime="20221125 00:51:26.208" endtime="20221125 00:51:27.225"/>
+</kw>
+<status status="PASS" starttime="20221125 00:51:26.207" endtime="20221125 00:51:27.225"/>
+</kw>
+<kw name="And edit field cargaAlcancada Of Exercise Rosca Direta With Value 10" sourcename="Edit Field ${campo} Of Exercise ${nome} With Value ${valor}">
+<kw name="Type Edit Input" library="resource">
+<arg>${nome}</arg>
+<arg>${campo}</arg>
+<arg>${valor}</arg>
+<kw name="Input Text" library="SeleniumLibrary">
+<arg>//textarea[contains(text(),'${nome}')]/..//input[@id='${atributo}']</arg>
+<arg>${valor}</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<msg timestamp="20221125 00:51:27.228" level="INFO">Typing text '10' into text field '//textarea[contains(text(),'Rosca Direta')]/..//input[@id='cargaAlcancada']'.</msg>
+<status status="PASS" starttime="20221125 00:51:27.227" endtime="20221125 00:51:28.257"/>
+</kw>
+<status status="PASS" starttime="20221125 00:51:27.227" endtime="20221125 00:51:28.257"/>
+</kw>
+<status status="PASS" starttime="20221125 00:51:27.226" endtime="20221125 00:51:28.257"/>
+</kw>
+<kw name="And edit field repeticoesFeitas Of Exercise Rosca Direta With Value 10" sourcename="Edit Field ${campo} Of Exercise ${nome} With Value ${valor}">
+<kw name="Type Edit Input" library="resource">
+<arg>${nome}</arg>
+<arg>${campo}</arg>
+<arg>${valor}</arg>
+<kw name="Input Text" library="SeleniumLibrary">
+<arg>//textarea[contains(text(),'${nome}')]/..//input[@id='${atributo}']</arg>
+<arg>${valor}</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<msg timestamp="20221125 00:51:28.259" level="INFO">Typing text '10' into text field '//textarea[contains(text(),'Rosca Direta')]/..//input[@id='repeticoesFeitas']'.</msg>
+<status status="PASS" starttime="20221125 00:51:28.259" endtime="20221125 00:51:29.282"/>
+</kw>
+<status status="PASS" starttime="20221125 00:51:28.259" endtime="20221125 00:51:29.282"/>
+</kw>
+<status status="PASS" starttime="20221125 00:51:28.258" endtime="20221125 00:51:29.282"/>
+</kw>
+<kw name="And save exercise Rosca Direta" sourcename="Save Exercise ${exercicio}">
+<kw name="Save Exercise" library="resource">
+<arg>${exercicio}</arg>
+<kw name="Click Element" library="SeleniumLibrary">
+<arg>//textarea[contains(text(),'${nome}')]/../..//button[contains(text(),'Salvar')]</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<msg timestamp="20221125 00:51:29.284" level="INFO">Clicking element '//textarea[contains(text(),'Rosca Direta')]/../..//button[contains(text(),'Salvar')]'.</msg>
+<status status="PASS" starttime="20221125 00:51:29.284" endtime="20221125 00:51:29.957"/>
+</kw>
+<kw name="Wait Until Element Is Visible" library="SeleniumLibrary">
+<arg>//section[contains(@class,'sucess')]</arg>
+<arg>2</arg>
+<doc>Waits until the element ``locator`` is visible.</doc>
+<status status="PASS" starttime="20221125 00:51:29.957" endtime="20221125 00:51:30.586"/>
+</kw>
+<kw name="Element Should Be Visible" library="SeleniumLibrary">
+<arg>//section[contains(@class,'sucess')]</arg>
+<arg>2</arg>
+<doc>Verifies that the element identified by ``locator`` is visible.</doc>
+<msg timestamp="20221125 00:51:31.213" level="INFO">Element '//section[contains(@class,'sucess')]' is displayed.</msg>
+<status status="PASS" starttime="20221125 00:51:30.586" endtime="20221125 00:51:31.213"/>
+</kw>
+<status status="PASS" starttime="20221125 00:51:29.284" endtime="20221125 00:51:31.213"/>
+</kw>
+<status status="PASS" starttime="20221125 00:51:29.283" endtime="20221125 00:51:31.213"/>
+</kw>
+<kw name="And edit field carga Of Exercise Rosca Concentrada With Value 10" sourcename="Edit Field ${campo} Of Exercise ${nome} With Value ${valor}">
+<kw name="Type Edit Input" library="resource">
+<arg>${nome}</arg>
+<arg>${campo}</arg>
+<arg>${valor}</arg>
+<kw name="Input Text" library="SeleniumLibrary">
+<arg>//textarea[contains(text(),'${nome}')]/..//input[@id='${atributo}']</arg>
+<arg>${valor}</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<msg timestamp="20221125 00:51:31.215" level="INFO">Typing text '10' into text field '//textarea[contains(text(),'Rosca Concentrada')]/..//input[@id='carga']'.</msg>
+<status status="PASS" starttime="20221125 00:51:31.214" endtime="20221125 00:51:32.243"/>
+</kw>
+<status status="PASS" starttime="20221125 00:51:31.214" endtime="20221125 00:51:32.243"/>
+</kw>
+<status status="PASS" starttime="20221125 00:51:31.213" endtime="20221125 00:51:32.243"/>
+</kw>
+<kw name="And edit field cargaAlcancada Of Exercise Rosca Concentrada With Value 10" sourcename="Edit Field ${campo} Of Exercise ${nome} With Value ${valor}">
+<kw name="Type Edit Input" library="resource">
+<arg>${nome}</arg>
+<arg>${campo}</arg>
+<arg>${valor}</arg>
+<kw name="Input Text" library="SeleniumLibrary">
+<arg>//textarea[contains(text(),'${nome}')]/..//input[@id='${atributo}']</arg>
+<arg>${valor}</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<msg timestamp="20221125 00:51:32.245" level="INFO">Typing text '10' into text field '//textarea[contains(text(),'Rosca Concentrada')]/..//input[@id='cargaAlcancada']'.</msg>
+<status status="PASS" starttime="20221125 00:51:32.245" endtime="20221125 00:51:33.274"/>
+</kw>
+<status status="PASS" starttime="20221125 00:51:32.244" endtime="20221125 00:51:33.274"/>
+</kw>
+<status status="PASS" starttime="20221125 00:51:32.244" endtime="20221125 00:51:33.274"/>
+</kw>
+<kw name="And edit field repeticoesFeitas Of Exercise Rosca Concentrada With Value 10" sourcename="Edit Field ${campo} Of Exercise ${nome} With Value ${valor}">
+<kw name="Type Edit Input" library="resource">
+<arg>${nome}</arg>
+<arg>${campo}</arg>
+<arg>${valor}</arg>
+<kw name="Input Text" library="SeleniumLibrary">
+<arg>//textarea[contains(text(),'${nome}')]/..//input[@id='${atributo}']</arg>
+<arg>${valor}</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<msg timestamp="20221125 00:51:33.277" level="INFO">Typing text '10' into text field '//textarea[contains(text(),'Rosca Concentrada')]/..//input[@id='repeticoesFeitas']'.</msg>
+<status status="PASS" starttime="20221125 00:51:33.276" endtime="20221125 00:51:34.310"/>
+</kw>
+<status status="PASS" starttime="20221125 00:51:33.276" endtime="20221125 00:51:34.310"/>
+</kw>
+<status status="PASS" starttime="20221125 00:51:33.275" endtime="20221125 00:51:34.310"/>
+</kw>
+<kw name="And save exercise Rosca Concentrada" sourcename="Save Exercise ${exercicio}">
+<kw name="Save Exercise" library="resource">
+<arg>${exercicio}</arg>
+<kw name="Click Element" library="SeleniumLibrary">
+<arg>//textarea[contains(text(),'${nome}')]/../..//button[contains(text(),'Salvar')]</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<msg timestamp="20221125 00:51:34.312" level="INFO">Clicking element '//textarea[contains(text(),'Rosca Concentrada')]/../..//button[contains(text(),'Salvar')]'.</msg>
+<status status="PASS" starttime="20221125 00:51:34.312" endtime="20221125 00:51:34.986"/>
+</kw>
+<kw name="Wait Until Element Is Visible" library="SeleniumLibrary">
+<arg>//section[contains(@class,'sucess')]</arg>
+<arg>2</arg>
+<doc>Waits until the element ``locator`` is visible.</doc>
+<status status="PASS" starttime="20221125 00:51:34.986" endtime="20221125 00:51:35.609"/>
+</kw>
+<kw name="Element Should Be Visible" library="SeleniumLibrary">
+<arg>//section[contains(@class,'sucess')]</arg>
+<arg>2</arg>
+<doc>Verifies that the element identified by ``locator`` is visible.</doc>
+<msg timestamp="20221125 00:51:36.237" level="INFO">Element '//section[contains(@class,'sucess')]' is displayed.</msg>
+<status status="PASS" starttime="20221125 00:51:35.609" endtime="20221125 00:51:36.237"/>
+</kw>
+<status status="PASS" starttime="20221125 00:51:34.312" endtime="20221125 00:51:36.237"/>
+</kw>
+<status status="PASS" starttime="20221125 00:51:34.311" endtime="20221125 00:51:36.237"/>
+</kw>
+<kw name="And close modal">
 <kw name="Wait Until Element Is Not Visible" library="SeleniumLibrary">
-<arg>//h1[contains(text(),'Bem Vindo')]</arg>
+<arg>//section[contains(@class,'sucess')]</arg>
+<arg>3</arg>
 <doc>Waits until the element ``locator`` is not visible.</doc>
-<status status="PASS" starttime="20221124 19:57:56.777" endtime="20221124 19:57:57.200"/>
+<status status="PASS" starttime="20221125 00:51:36.238" endtime="20221125 00:51:36.551"/>
 </kw>
-<kw name="Location Should Be" library="SeleniumLibrary">
-<arg>${LOGGED URL ADM}</arg>
-<doc>Verifies that the current URL is exactly ``url``.</doc>
-<msg timestamp="20221124 19:57:57.609" level="INFO">Current location is 'http://localhost:3001/adm'.</msg>
-<status status="PASS" starttime="20221124 19:57:57.200" endtime="20221124 19:57:57.609"/>
+<kw name="Wait Until Element Is Enabled" library="SeleniumLibrary">
+<arg>//div[@class='popup-container-elements']//button[contains(text(),'Fechar')]</arg>
+<doc>Waits until the element ``locator`` is enabled.</doc>
+<status status="PASS" starttime="20221125 00:51:36.551" endtime="20221125 00:51:37.489"/>
 </kw>
-<status status="PASS" starttime="20221124 19:57:56.776" endtime="20221124 19:57:57.609"/>
+<kw name="Click Button By Text" library="CustomLibraryTests">
+<arg>Fechar</arg>
+<status status="PASS" starttime="20221125 00:51:37.489" endtime="20221125 00:51:38.148"/>
 </kw>
-<status status="PASS" starttime="20221124 19:57:52.306" endtime="20221124 19:57:57.610"/>
+<kw name="Wait Until Element Is Not Visible" library="SeleniumLibrary">
+<arg>//section[@id='modal-editar']</arg>
+<doc>Waits until the element ``locator`` is not visible.</doc>
+<status status="PASS" starttime="20221125 00:51:38.148" endtime="20221125 00:51:38.463"/>
+</kw>
+<status status="PASS" starttime="20221125 00:51:36.238" endtime="20221125 00:51:38.463"/>
+</kw>
+<kw name="Logoff" library="resource" type="TEARDOWN">
+<kw name="Click Button By Text" library="CustomLibraryTests">
+<arg>Sair</arg>
+<status status="PASS" starttime="20221125 00:51:38.465" endtime="20221125 00:51:39.118"/>
+</kw>
+<status status="PASS" starttime="20221125 00:51:38.464" endtime="20221125 00:51:39.118"/>
+</kw>
+<status status="PASS" starttime="20221125 00:51:22.480" endtime="20221125 00:51:39.119"/>
+</test>
+<test id="s1-t3" name="Test Delete User" line="31">
+<kw name="Given browser is opened to login page">
+<kw name="Login Page Should Be Open" library="resource">
+<kw name="Title Should Be" library="SeleniumLibrary">
+<arg>Login</arg>
+<doc>Verifies that the current page title equals ``title``.</doc>
+<msg timestamp="20221125 00:51:39.446" level="INFO">Page title is 'Login'.</msg>
+<status status="PASS" starttime="20221125 00:51:39.123" endtime="20221125 00:51:39.446"/>
+</kw>
+<status status="PASS" starttime="20221125 00:51:39.123" endtime="20221125 00:51:39.446"/>
+</kw>
+<status status="PASS" starttime="20221125 00:51:39.122" endtime="20221125 00:51:39.446"/>
+</kw>
+<kw name="When user &quot;${LOGIN ADM}&quot; logs in with password &quot;${PASSWORD ADM}&quot;" sourcename="User &quot;${username}&quot; logs in with password &quot;${password}&quot;">
+<kw name="Input User Name" library="resource">
+<arg>${username}</arg>
+<kw name="Input Text" library="SeleniumLibrary">
+<arg>usuario</arg>
+<arg>${username}</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<msg timestamp="20221125 00:51:39.448" level="INFO">Typing text 'Matheus Scheffer' into text field 'usuario'.</msg>
+<status status="PASS" starttime="20221125 00:51:39.448" endtime="20221125 00:51:40.481"/>
+</kw>
+<status status="PASS" starttime="20221125 00:51:39.448" endtime="20221125 00:51:40.481"/>
+</kw>
+<kw name="Input Password" library="resource">
+<arg>${password}</arg>
+<kw name="Input Text" library="SeleniumLibrary">
+<arg>senha</arg>
+<arg>${password}</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<msg timestamp="20221125 00:51:40.482" level="INFO">Typing text '123' into text field 'senha'.</msg>
+<status status="PASS" starttime="20221125 00:51:40.482" endtime="20221125 00:51:41.497"/>
+</kw>
+<status status="PASS" starttime="20221125 00:51:40.481" endtime="20221125 00:51:41.497"/>
+</kw>
+<kw name="Submit Credentials" library="resource">
+<arg>Logar</arg>
+<kw name="Click Element" library="SeleniumLibrary">
+<arg>//button[contains(text(),'${text}')]</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<msg timestamp="20221125 00:51:41.498" level="INFO">Clicking element '//button[contains(text(),'Logar')]'.</msg>
+<status status="PASS" starttime="20221125 00:51:41.498" endtime="20221125 00:51:42.152"/>
+</kw>
+<status status="PASS" starttime="20221125 00:51:41.498" endtime="20221125 00:51:42.152"/>
+</kw>
+<status status="PASS" starttime="20221125 00:51:39.447" endtime="20221125 00:51:42.152"/>
+</kw>
+<kw name="Then Delete User Usuario Teste" sourcename="Delete User ${user}">
+<kw name="Click On Excluir Button" library="CustomLibraryTests">
+<arg>${user}</arg>
+<status status="PASS" starttime="20221125 00:51:42.154" endtime="20221125 00:51:42.828"/>
+</kw>
+<kw name="Wait Until Element Is Not Visible" library="SeleniumLibrary">
+<arg>//li/span[contains(text(),'${user}')]</arg>
+<doc>Waits until the element ``locator`` is not visible.</doc>
+<status status="PASS" starttime="20221125 00:51:42.828" endtime="20221125 00:51:43.155"/>
+</kw>
+<status status="PASS" starttime="20221125 00:51:42.153" endtime="20221125 00:51:43.155"/>
+</kw>
+<kw name="Logoff" library="resource" type="TEARDOWN">
+<kw name="Click Button By Text" library="CustomLibraryTests">
+<arg>Sair</arg>
+<status status="PASS" starttime="20221125 00:51:43.156" endtime="20221125 00:51:43.815"/>
+</kw>
+<status status="PASS" starttime="20221125 00:51:43.156" endtime="20221125 00:51:43.815"/>
+</kw>
+<status status="PASS" starttime="20221125 00:51:39.121" endtime="20221125 00:51:43.816"/>
 </test>
 <kw name="Close Browser" library="SeleniumLibrary" type="TEARDOWN">
 <doc>Closes the current browser.</doc>
-<status status="PASS" starttime="20221124 19:57:57.612" endtime="20221124 19:58:00.178"/>
+<status status="PASS" starttime="20221125 00:51:43.819" endtime="20221125 00:51:46.243"/>
 </kw>
-<status status="PASS" starttime="20221124 19:57:49.438" endtime="20221124 19:58:00.178"/>
+<status status="PASS" starttime="20221125 00:50:54.963" endtime="20221125 00:51:46.243"/>
 </suite>
 <statistics>
 <total>
-<stat pass="1" fail="0" skip="0">All Tests</stat>
+<stat pass="3" fail="0" skip="0">All Tests</stat>
 </total>
 <tag>
 </tag>
 <suite>
-<stat pass="1" fail="0" skip="0" id="s1" name="Valid Login">Valid Login</stat>
+<stat pass="3" fail="0" skip="0" id="s1" name="Test Cases">Test Cases</stat>
 </suite>
 </statistics>
 <errors>
-<msg timestamp="20221124 19:57:49.707" level="WARN">Imported library 'C:\Users\matheus.scheffer\Documents\projeto-desenvolvimento-II\Testes-Aceite\lib\CustomLibraryTests.py' contains no keywords.</msg>
 </errors>
 </robot>
