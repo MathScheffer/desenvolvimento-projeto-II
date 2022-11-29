@@ -8,7 +8,7 @@ const Redireciona = () => {
     }
     return(
         <section id="redirecionar">
-            <h1>Você não possui permissão para acessar este conteúdo.</h1>
+            <h1>Você não possui permissão para acessar este conteúdo OU seu token expirou.</h1>
 
             <Button 
                 onClick={limparToken}

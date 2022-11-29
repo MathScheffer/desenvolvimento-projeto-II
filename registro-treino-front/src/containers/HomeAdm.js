@@ -1,6 +1,5 @@
 import React, { useState }  from 'react';
 import { Helmet } from 'react-helmet';
-import { Link, NavLink, Route, Routes } from 'react-router-dom';
 
 import CadastroForm from '../components/cadastroForm';
 import Header from '../components/header';

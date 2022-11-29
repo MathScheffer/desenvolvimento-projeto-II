@@ -9,6 +9,8 @@ import useFetch from "../../customHooks/useFetch";
 
 import requests from '../../constants/requests';
 import { Helmet } from "react-helmet";
+import TratamentoErros from "../../utils/tratamentoErros";
+import Mensagem from "../mensagem";
 
 const PopupEditarRotina = ({setReload}) => {
     const navigate = useNavigate();
@@ -19,6 +21,8 @@ const PopupEditarRotina = ({setReload}) => {
     const isAddCard = useRef(false);
     const doApagarRotina = useRef(false);
     const doRetirarRotina = useRef(false);
+    let timeOutRef = useRef();
+
     const params = useParams()
 
     const [rotinaAtual, setRotinaAtual] = useState();
@@ -30,11 +34,19 @@ const PopupEditarRotina = ({setReload}) => {
     const [formsAddList, setFormsAddList] = useState([]);
     const [reloadPopup, setReloadPopup] = useState(0);
     const [idUsuario, setIdUsuario] = useState();
-    
+    const [mensagem, setMensagem] = useState();
+
     const {data, loading, error, request} = useFetch();
 
     useEffect(() => {
-        request(requests.GET_ROTINA(params.id_rotina))
+        const options = {
+            headers:
+            {
+                'content-type':'application/json',
+                'x-auth-token':localStorage.getItem('token')
+            }
+        }
+        request(requests.GET_ROTINA(params.id_rotina),options)
     },[reloadPopup])
 
     useEffect(() => {
@@ -72,7 +84,9 @@ const PopupEditarRotina = ({setReload}) => {
             const options = {
                 'method':'DELETE',
                 'headers':{
-                    'Content-Type':'application/json'
+                    'Content-Type':'application/json',
+                    'x-auth-token': localStorage.getItem('token'),
+
                 }
             }
             request(requests.DELETE_ROTINA(rotinaAtual._id), options)
@@ -99,7 +113,8 @@ const PopupEditarRotina = ({setReload}) => {
             const options = {
                 'method':'PUT',
                 'headers':{
-                    'Content-Type':'application/json'
+                    'Content-Type':'application/json',
+                    'x-auth-token':localStorage.getItem('token')
                 },
                 'body': JSON.stringify(body)
             }
@@ -115,6 +130,21 @@ const PopupEditarRotina = ({setReload}) => {
                 })
         }
     },[idUsuario])
+
+    useEffect(() => {
+        if(error){
+            if(error.erro && error.erro.includes('Necessario informar o token')){
+                setMensagem(new TratamentoErros(error).mensagemErro())
+
+                clearTimeout(timeOutRef.current)
+
+                timeOutRef.current = setTimeout(() => {
+                    setMensagem(null)
+                },1500)
+            }
+        }
+        
+    }, [error])
 
     const apagarAddCard = (index) => {
         setCardIndex(index)
@@ -140,6 +170,7 @@ const PopupEditarRotina = ({setReload}) => {
     
 return(
     <>
+    {error && mensagem && <Mensagem conteudo={mensagem} tipo='danger'/>}
     <Helmet>
         <meta charset="UTF-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />

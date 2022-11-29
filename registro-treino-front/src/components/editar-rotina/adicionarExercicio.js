@@ -5,13 +5,18 @@ import Utils from '../../utils/Utils';
 import AdicionarExercicioUi from "./adicionarFormExercicioUi";
 import useFetch from '../../customHooks/useFetch';
 import { useEffect, useRef, useState } from "react";
+import TratamentoErros from '../../utils/tratamentoErros';
+import Mensagem from '../mensagem';
 
 const AdicionarExercicio = ({indexCard, apagarAddCard, idRotina, setReloadPopup}) => {
     const atributos = useRef()
     const doRequest = useRef(false);
+    let timeOutRef = useRef();
 
     const {data, loading, error, request} = useFetch();
     const [addRequest, setAddRequest] = useState(0);
+
+    const [mensagem, setMensagem] = useState()
 
     const [form,setForm] = useState({})
 
@@ -26,7 +31,8 @@ const AdicionarExercicio = ({indexCard, apagarAddCard, idRotina, setReloadPopup}
         const options = {
             'method':'PUT',
             'headers':{
-                'Content-Type':'application/json'
+                'Content-Type':'application/json',
+                'x-auth-token':localStorage.getItem('token')
             },
             'body':JSON.stringify(body)
         }
@@ -42,8 +48,19 @@ const AdicionarExercicio = ({indexCard, apagarAddCard, idRotina, setReloadPopup}
     },[addRequest])
 
     useEffect(() => {
-        console.log(error)
+        if(error){
+            if(error.erro && error.erro.includes("Necessario informar o token")){
+                setMensagem(new TratamentoErros(error).mensagemErro())
+
+                clearTimeout(timeOutRef.current);
+
+                timeOutRef.current = setTimeout(() => {
+                    setMensagem(null)
+                }, 1500)
+            }
+        }
     },[error])
+
     useEffect(() => {
         console.log(indexCard)
     }, [indexCard])
@@ -73,6 +90,8 @@ const AdicionarExercicio = ({indexCard, apagarAddCard, idRotina, setReloadPopup}
     }
 
     return(
+        <>
+        {error && mensagem && <Mensagem conteudo={mensagem} tipo='danger'/>}
         <AdicionarExercicioUi  
             nome={form.nome}
             repeticoes={form.repeticoes}
@@ -83,6 +102,8 @@ const AdicionarExercicio = ({indexCard, apagarAddCard, idRotina, setReloadPopup}
             salvar={salvar}
             apagarCard={apagarCard}
         ></AdicionarExercicioUi>
+
+        </>
     )
 }
 

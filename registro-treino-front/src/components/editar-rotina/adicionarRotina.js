@@ -6,6 +6,7 @@ import AdicionarRotinaUi from './adicionarRotinaUi'
 import Mensagem from '../mensagem';
 import requests from '../../constants/requests';
 import Utils from '../../utils/Utils';
+import TratamentoErros from '../../utils/tratamentoErros';
 
 const AdicionarRotina =  ({atributos, 
     idUsuario,
@@ -40,7 +41,8 @@ const AdicionarRotina =  ({atributos,
         const options = {
             'method':'POST',
             'headers':{
-                'Content-Type':'application/json'
+                'Content-Type':'application/json',
+                'x-auth-token':localStorage.getItem('token')
             },
             'body':JSON.stringify(body)
         }
@@ -69,7 +71,8 @@ const AdicionarRotina =  ({atributos,
         const options = {
             'method':'PUT',
             'headers':{
-                'Content-Type':'application/json'
+                'Content-Type':'application/json',
+                'x-auth-token':localStorage.getItem('token')
             },
             'body':JSON.stringify(body)
         }
@@ -95,8 +98,16 @@ const AdicionarRotina =  ({atributos,
     useEffect(() => {
         console.log(error)
         if(error){
-            if(error.message.includes('O usuario ja possui uma rotina no dia de')){
+            if(error.message && error.message.includes('O usuario ja possui uma rotina no dia de')){
                 setMensagem(error.message);
+
+                clearTimeout(timeOutRef.current);
+
+                timeOutRef.current = setTimeout(() => {
+                    setMensagem(null)
+                },2500)
+            }else if(error.erro){
+                setMensagem(new TratamentoErros(error).mensagemErro());
 
                 clearTimeout(timeOutRef.current);
 

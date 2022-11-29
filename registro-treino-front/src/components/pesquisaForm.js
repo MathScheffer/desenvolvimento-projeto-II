@@ -7,9 +7,13 @@ import { useEffect, useRef, useState} from "react";
 import Button from "./button";
 import { NavLink } from "react-router-dom";
 import ResultadoPesquisa from "./resultadoPesquisa";
+import TratamentoErros from '../utils/tratamentoErros';
+import Mensagem from './mensagem';
 
 const PesquisaForm = ({triggerGetUsuarios, nome, setNome,...props}) => {
     let doDelete = useRef(false);
+
+    let timeOutRef = useRef();
 
     const { data, loading, error, request } = useFetch();
   
@@ -17,30 +21,46 @@ const PesquisaForm = ({triggerGetUsuarios, nome, setNome,...props}) => {
 
     const [idUsuarioForDelete, setIdUsuarioForDelete] = useState();
     const [doDeleteIncrem, setDoDeleteIncrem] = useState(0);
+    const [mensagem, setMensagem] = useState();
 
     useEffect(() => {
-        console.log(`Nome: ${nome}`)
-        console.log(`Data antes da request: ${data}`)
-        request(requests.GET_USUARIO_BY_NOME(nome))
+        const options = {
+            headers: {
+                "contentType":"application/json",
+                "x-auth-token": localStorage.getItem("token")
+            }
+        }
+        request(requests.GET_USUARIO_BY_NOME(nome), options)
 
     },[nome,triggerGetUsuarios]) 
 
     useEffect(() =>{
-        console.log(error)
+        if(error){
+            console.log(error)
+            setMensagem(new TratamentoErros(error).mensagemErro());
+            clearTimeout(timeOutRef.current)
+
+            timeOutRef.current = setTimeout(() => {
+                setMensagem(null);
+            }, 1500)
+        }
+        
     },[error])
 
     useEffect(() => {
-        console.log("Usuario for delete: " + idUsuarioForDelete)
+        console.log(mensagem)
+    },[mensagem])
+
+    useEffect(() => {
         if(doDelete && idUsuarioForDelete) {
 
             const options = {
                 'method':'DELETE',
                 'headers':{
-                    'Content-Type':'application/json'
+                    'Content-Type':'application/json',
+                    'x-auth-token':localStorage.getItem('token')
                 }
             }
-
-            console.log("entrou na request")
             request(requests.DELETE_USUARIO(idUsuarioForDelete), options).then(resp => {
                 console.log(resp)
             })
@@ -49,11 +69,9 @@ const PesquisaForm = ({triggerGetUsuarios, nome, setNome,...props}) => {
     
    useEffect(() => {
         if(data && data.length >= 0) {
-            console.log(`Usuarios: ${usuarios}`)
             setUsuarios(data)
 
         }else if(data && data.message === 'Usuario excluido com sucesso!'){
-            console.log("Entrou no usuario excluido")
 
             let newUsuarios = usuarios;
             let indexesUsuario = newUsuarios.map(usuario => usuario._id)
@@ -78,6 +96,8 @@ const PesquisaForm = ({triggerGetUsuarios, nome, setNome,...props}) => {
     }
 
     return(
+        <>
+        {error && mensagem && <Mensagem conteudo={mensagem} tipo='danger'/>}
         <div  {...props}>
             <section id="pesquisa-form">
                 <h2>Pesquisar Aluno</h2>
@@ -98,7 +118,7 @@ const PesquisaForm = ({triggerGetUsuarios, nome, setNome,...props}) => {
             </section>
             
         </div>
-        
+        </>
     )
 }
 

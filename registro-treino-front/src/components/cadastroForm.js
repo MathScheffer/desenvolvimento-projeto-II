@@ -33,7 +33,8 @@ const CadastroForm = ({setTriggerGetUsuarios, setNome, ...props}) => {
         const options = {
             'method':'POST',
             'headers':{
-                'Content-Type':'application/json'
+                'Content-Type':'application/json',
+                'x-auth-token':localStorage.getItem('token')
             },
             'body':JSON.stringify(body)
         }

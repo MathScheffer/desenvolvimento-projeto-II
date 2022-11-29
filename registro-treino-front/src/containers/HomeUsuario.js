@@ -5,28 +5,46 @@ import PopupRotinaUsuario from "../components/Usuario/popupRotinaUsuario";
 import Header from "../components/header";
 import useFetch from "../customHooks/useFetch";
 import { Helmet } from "react-helmet";
+import TratamentoErros from "../utils/tratamentoErros";
+import Mensagem from "../components/mensagem";
+import Requests from '../constants/requests';
+import PrivateRoute from "../components/PrivateRoute";
 
 const HomeUsuario = () => {
     const params = useParams();
+    let timeOutRef = useRef();
+
     const [usuario, setUsuario] = useState();
     const [reload, setReload] = useState(0);
     const {data, loading, error, request } = useFetch();
+    const [mensagem, setMensagem] = useState();
     let doRequest = useRef(true);
 
     useEffect(() => {
-        const url = `http://localhost:3000/api/usuarios/${params.id}`;
+        const options = {
+            headers: {
+                'Content-Type': 'application/json',
+                'x-auth-token':localStorage.getItem('token')
+            }
+        }
+        
         if(doRequest.current){
-            console.log("primeiro carregamento")
-            request(url)    
+            request(Requests.GET_USUARIO_BY_ID(params.id), options)    
         }
         doRequest = false
     },[request])
 
     useEffect(() => {
-        const url = `http://localhost:3000/api/usuarios/${params.id}`;
+        const options = {
+            headers: {
+                'Content-Type': 'application/json',
+                'x-auth-token':localStorage.getItem('token')
+            }
+        }
+        
         if(doRequest.current){
             console.log("realizando update maroto")
-            request(url)    
+            request(Requests.GET_USUARIO_BY_ID(params.id), options)    
             
         }
     },[reload])
@@ -37,9 +55,22 @@ const HomeUsuario = () => {
         console.log(usuario)
     },[data])
 
+    useEffect(()  => {
+        if(error){
+            setMensagem(new TratamentoErros(error).mensagemErro());
+
+            clearTimeout(timeOutRef.current)
+
+            timeOutRef.current = setTimeout(() => {
+                
+                setMensagem(null);
+            },1500)
+        }
+    },error)
+
     return(
-        
         <>
+        {error && mensagem && <Mensagem tipo="danger" conteudo={mensagem}/>}
         <Helmet>
         <meta charset="UTF-8" />
             <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -53,11 +84,14 @@ const HomeUsuario = () => {
         <RotinaUsuario nome={usuario.nome} rotina={usuario.rotina}/>
 
         <Routes>
-            <Route 
-                path='rotina/:id_rotina' 
-                element={
-                    <PopupRotinaUsuario setReload={setReload}/>
-                }/>
+           
+                <Route 
+                    path='rotina/:id_rotina' 
+                    element={
+                        <PrivateRoute role='USER'>
+                            <PopupRotinaUsuario setReload={setReload}/>
+                        </PrivateRoute>
+                    }/>
         </Routes>
         
         
