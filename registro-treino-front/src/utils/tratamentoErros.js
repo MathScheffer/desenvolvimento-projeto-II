@@ -16,13 +16,14 @@ export default class TratamentoErros {
             
             this.parametrosInformados = Object.entries(this.erro.parametro_informado)
             
+        }else if(this.erro.erro || this.erro.message){
+            this.erro = this.erro.erro || this.erro.message
         }else{
             const arrAtributosUsuario = 
             ["nome" ,"senha","whatsapp","idade","peso","sexo","objetivo","rotina","CastError"]
             for (const obj of Object.entries(this.erro)){
                 let k = obj[0]
-                console.log(k)
-                console.log(this.erro[k])
+
                 if(arrAtributosUsuario.includes(k)){
                     this.arrMessage.push(this.erro[k])
                 }
@@ -37,6 +38,8 @@ export default class TratamentoErros {
             for (const obj of this.parametrosInformados){
                 this.message  = this.message +  obj.join("= ")
             }
+        }else if(typeof this.erro){
+            this.message = this.erro
         }else if(this.arrMessage){
             this.message = this.arrMessage.join(",")
         }

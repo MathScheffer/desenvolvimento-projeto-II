@@ -62,7 +62,8 @@ const EditarExercicio = ({exercicio, setReloadPopup}) => {
             const options = {
                 'method':'PUT',
                 'headers':{
-                    'Content-Type':'application/json'
+                    'Content-Type':'application/json',
+                    'x-auth-token':localStorage.getItem('token')
                 },
                 'body':JSON.stringify(body)
             }
@@ -85,14 +86,13 @@ const EditarExercicio = ({exercicio, setReloadPopup}) => {
         const options = {
             'method':'DELETE',
             'headers':{
-                'Content-Type':'application/json'
+                'Content-Type':'application/json',
+                'x-auth-token': localStorage.getItem('token')
             }
 
         }
 
         if(deleteData.current){
-            console.log(`Exercicio id: ${exercicio._id}`)
-            console.log(`Exercicio nome: ${exercicio.nome}`)
             request(requests.DELETE_EXERCICIO(exercicio._id), options)
             .then(response => {
                 console.log(response)
@@ -108,7 +108,7 @@ const EditarExercicio = ({exercicio, setReloadPopup}) => {
     useEffect(() => {
         if(error){
             setMensagem(new TratamentoErros(error).mensagemErro())
-            console.log(new TratamentoErros(error).mensagemErro())
+
             clearTimeout(timeOutRef.current)
             timeOutRef.current = setTimeout(() => {
                 setMensagem(null);

@@ -12,6 +12,8 @@ exports.PUT_ADD_EXERCICIO = (id_rotina) => `http://localhost:3000/api/rotinas/${
 
 exports.DELETE_EXERCICIO = (id_exercicio) => `http://localhost:3000/api/rotinas/exercicio/${id_exercicio}`
 
+exports.GET_USUARIO_BY_ID = (id_usuario) => `http://localhost:3000/api/usuarios/${id_usuario}`
+
 exports.GET_USUARIO_BY_NOME = (nome_usuario) => `http://localhost:3000/api/usuarios/query?nome=${nome_usuario}`
 
 exports.DELETE_USUARIO = (id_usuario) => `http://localhost:3000/api/usuarios/${id_usuario}`

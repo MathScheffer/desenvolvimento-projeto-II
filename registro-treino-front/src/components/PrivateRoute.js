@@ -1,7 +1,6 @@
 import React from "react"
 import { Link, Navigate } from "react-router-dom"
 import JWT from 'jsonwebtoken';
-import Button from "./button";
 import Redireciona from "./redireciona";
 const PrivateRoute = ({role,children}) => {
     
@@ -15,16 +14,11 @@ const PrivateRoute = ({role,children}) => {
                 JWT.verify(token, 'encryptor', (err, payload) => {
                     console.log(err)
                     console.log(payload)
-                    if(err){
+                    if(err || payload.role !== role){
                         console.log(err.name)
                         return <Redireciona />
-
-                    }else if(payload.role == role){
-                        return children
                     }else{
-                        return <div>
-                            <h1>Você não possue permissão para acessar essa página!</h1>
-                        </div>
+                        return children
                     }
                 })
            )
