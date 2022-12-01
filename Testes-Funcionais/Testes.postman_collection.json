@@ -1,0 +1,871 @@
+{
+	"info": {
+		"_postman_id": "68738b3f-a626-4639-9ede-2b36b6fce167",
+		"name": "Testes",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "14064559"
+	},
+	"item": [
+		{
+			"name": "Jornadas Positivas",
+			"item": [
+				{
+					"name": "Adicionar Usuário, rotina e treino",
+					"item": [
+						{
+							"name": "1 - auth Copy",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"var data = JSON.parse(responseBody);\r",
+											"postman.setEnvironmentVariable('token', data.token);"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"usuario\":\"Matheus Scheffer\",\r\n    \"senha\":\"123\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3000/api/token/",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"api",
+										"token",
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "2 - Adicionar usuario",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"var data = JSON.parse(responseBody);\r",
+											"postman.setEnvironmentVariable('id_usuario', data._id);\r",
+											"\r",
+											"var nome_inicial = pm.environment.get('nome_inicial')\r",
+											"\r",
+											"pm.test(`User of response should be ${nome_inicial}`, () => {\r",
+											"    pm.expect(data.nome).to.be.eql(nome_inicial)\r",
+											"})"
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"postman.setEnvironmentVariable('nome_inicial','Roberto Silva')\r",
+											"        "
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "x-auth-token",
+										"value": "{{token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"nome\": \"{{nome_inicial}}\",\r\n    \"senha\":\"roberto.silva\",\r\n    \"idade\": 25,\r\n    \"peso\":80,\r\n    \"sexo\": \"Homem\",\r\n    \"whatsapp\":123454,\r\n    \"role\":\"USER\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3000/api/usuarios/",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"api",
+										"usuarios",
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "3 - Adicionar Rotina",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"var data = JSON.parse(responseBody);\r",
+											"\r",
+											"if(data._id){\r",
+											"    postman.setEnvironmentVariable('id_rotina', data._id);\r",
+											"}\r",
+											"\r",
+											"\r",
+											"pm.test('Length of exercicios should be 3', () => {\r",
+											"    pm.expect(data.exercicios).to.length(3)\r",
+											"})"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "x-auth-token",
+										"value": "{{token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"dia\":\"Segunda\",\r\n    \"exercicios\": [\r\n        {\r\n            \"nome\":\"Supino Reto\",\r\n            \"carga\":10,\r\n            \"repeticoes\":10,\r\n            \"series\":3\r\n        },\r\n        {\r\n            \"nome\":\"Supino Inclinado\",\r\n            \"carga\":10,\r\n            \"repeticoes\":10,\r\n            \"series\":3\r\n        },\r\n        {\r\n            \"nome\":\"Voador\",\r\n            \"carga\":10,\r\n            \"repeticoes\":10,\r\n            \"series\":3\r\n        }\r\n    ],\r\n    \"usuario\": \"{{id_usuario}}\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3000/api/rotinas",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"api",
+										"rotinas"
+									],
+									"query": [
+										{
+											"key": "x-auth-token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYxOWE2Yzg4YTgyZDQ5MTJlMDkwZWU0NiIsInJvbGUiOiJhZG0iLCJpYXQiOjE2Mzc1MTc4OTgsImV4cCI6MTYzNzUyMTQ5OH0.jdmkW2hog9hzh6FfaKv3tcr_A2nXwd_IZtDajkaoeyw",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "4 - Incrementar Rotina",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"var data = JSON.parse(responseBody)\r",
+											"\r",
+											"pm.test('Message should be \"Usuario atualizado com sucesso!\"', () => {\r",
+											"    pm.expect(data.message).to.be.eq(\"Usuario atualizado com sucesso!\")\r",
+											"})\r",
+											"\r",
+											"pm.test('Rotina of Usuario should be lenght equal than 1', () => {\r",
+											"    pm.expect(data.usuario.rotina).to.be.length(1)\r",
+											"})"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "x-auth-token",
+										"value": "{{token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"rotina\": \"{{id_rotina}}\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3000/api/usuarios/incrementar-rotina/{{id_usuario}}",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"api",
+										"usuarios",
+										"incrementar-rotina",
+										"{{id_usuario}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "5 - Adicionar Exercicio",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"postman.setEnvironmentVariable('novo_exercicio','Supino Reto com Halteres')"
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"var data = JSON.parse(responseBody)\r",
+											"\r",
+											"var novo_exercicio_nome = pm.environment.get('novo_exercicio')\r",
+											"\r",
+											"pm.test(`Message hould be \"Rotina atualizada com sucesso!\"`, () => {\r",
+											"    pm.expect(data.message).to.be.eql(\"Rotina atualizada com sucesso!\")\r",
+											"})\r",
+											"\r",
+											"pm.test(`Name of novo_exercicio should be ${novo_exercicio_nome}`, () => {\r",
+											"    pm.expect(data.novo_exercicio.nome).to.be.eql(novo_exercicio_nome)\r",
+											"})"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "x-auth-token",
+										"value": "{{token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n\"nome\":\"{{novo_exercicio}}\",\r\n\"series\":\"4x5x6\",\r\n\"repeticoes\":\"10\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3000/api/rotinas/{{id_rotina}}/exercicio/adicionar",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"api",
+										"rotinas",
+										"{{id_rotina}}",
+										"exercicio",
+										"adicionar"
+									],
+									"query": [
+										{
+											"key": "x-auth-token",
+											"value": "",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "6 -  Pegar Usuario Especifico",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"var data = JSON.parse(responseBody)\r",
+											"\r",
+											"var nome = pm.environment.get('nome_inicial')\r",
+											"pm.test(`Nome of usuario should be equal of ${nome}`, () => {\r",
+											"    pm.expect(data.nome).to.be.eql(nome)\r",
+											"})\r",
+											"\r",
+											"pm.test('Exercicios should be length equal of 4', () => {\r",
+											"    pm.expect(data.rotina[0].exercicios).to.be.length(4)\r",
+											"})"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "x-auth-token",
+										"value": "{{token}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "http://localhost:3000/api/usuarios/{{id_usuario}}",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"api",
+										"usuarios",
+										"{{id_usuario}}"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Editar Usuario",
+					"item": [
+						{
+							"name": "1 - auth",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"var data = JSON.parse(responseBody);\r",
+											"postman.setEnvironmentVariable('token', data.token);"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"usuario\":\"Matheus Scheffer\",\r\n    \"senha\":\"123\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3000/api/token/",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"api",
+										"token",
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "2 - Atualizar usuario",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"var data = JSON.parse(responseBody)\r",
+											"\r",
+											"var novo_nome = pm.environment.get('novo_nome')\r",
+											"\r",
+											"console.log(novo_nome)\r",
+											"\r",
+											"pm.test(`Nome atualizado deve ser ${novo_nome}`, () => {\r",
+											"    pm.expect(data.usuario.nome).to.be.eql(novo_nome)\r",
+											"})"
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"postman.setEnvironmentVariable('novo_nome','Roberto Carlos')"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "x-auth-token",
+										"value": "{{token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"nome\":\"{{novo_nome}}\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3000/api/usuarios/{{id_usuario}}",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"api",
+										"usuarios",
+										"{{id_usuario}}"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Novo usuário - Ver rotinas e registrar treino",
+					"item": [
+						{
+							"name": "1 - auth",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"var data = JSON.parse(responseBody);\r",
+											"postman.setEnvironmentVariable('token', data.token);"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"usuario\":\"Matheus Scheffer\",\r\n    \"senha\":\"123\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3000/api/token/",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"api",
+										"token",
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "2 - Pegar por específico",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"var data = JSON.parse(responseBody);\r",
+											"postman.setEnvironmentVariable('id_exercicio1', data.exercicios[0]._id);\r",
+											"postman.setEnvironmentVariable('id_exercicio2', data.exercicios[1]._id);\r",
+											"postman.setEnvironmentVariable('id_exercicio3', data.exercicios[2]._id);\r",
+											"\r",
+											"pm.test(\"Exercise 1 should be 'Supino Reto'\", () => {\r",
+											"    pm.expect(data.exercicios[0].nome).to.be.eql('Supino Reto')\r",
+											"})\r",
+											"\r",
+											"pm.test(\"Exercise 2 should be 'Supino Inclinado'\", () => {\r",
+											"    pm.expect(data.exercicios[1].nome).to.be.eql('Supino Inclinado')\r",
+											"})\r",
+											"\r",
+											"pm.test(\"Exercise 3 should be 'Voador'\", () => {\r",
+											"    pm.expect(data.exercicios[2].nome).to.be.eql('Voador')\r",
+											"})"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "x-auth-token",
+										"value": "{{token}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "http://localhost:3000/api/rotinas/{{id_rotina}}",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"api",
+										"rotinas",
+										"{{id_rotina}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "3 - Registrar Exercicio",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"var data = JSON.parse(responseBody)\r",
+											"\r",
+											"pm.test(\"Message should be 'Exercicio da rotina atualizado com sucesso!'\", () =>{\r",
+											"    pm.expect(data.message).to.be.eql('Exercicio da rotina atualizado com sucesso!')\r",
+											"})"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "x-auth-token",
+										"value": "{{token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"cargaAlcancada\":8,\r\n    \"repeticoesFeitas\":10\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3000/api/rotinas/exercicio/{{id_exercicio1}}/registrar",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"api",
+										"rotinas",
+										"exercicio",
+										"{{id_exercicio1}}",
+										"registrar"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "4 - Encontrar Exercicio Específico",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"var resp = pm.response\r",
+											"\r",
+											"pm.test(\"Encontrar Exercicio ok \", function () {\r",
+											"    pm.expect(pm.response.code).to.be.oneOf([200]);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Validar CargaAlcancada e repeticoesFeitas \", function () {\r",
+											"    pm.expect(resp.json()[0].cargaAlcancada).to.be.eql(8)\r",
+											"    pm.expect(resp.json()[0].repeticoesFeitas).to.be.eql(\"10\")\r",
+											"});\r",
+											"\r",
+											"\r",
+											"\r",
+											"\r",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "x-auth-token",
+										"value": "{{token}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "http://localhost:3000/api/rotinas/exercicio/{{id_exercicio1}}",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"api",
+										"rotinas",
+										"exercicio",
+										"{{id_exercicio1}}"
+									],
+									"query": [
+										{
+											"key": "x-auth-token",
+											"value": "{{token}}",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Excluir exercicio, usuario e rotina",
+					"item": [
+						{
+							"name": "1 - auth Copy",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"var data = JSON.parse(responseBody);\r",
+											"postman.setEnvironmentVariable('token', data.token);"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"usuario\":\"Matheus Scheffer\",\r\n    \"senha\":\"123\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3000/api/token/",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"api",
+										"token",
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "2 - Excluir Exercicio 1",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"var data = JSON.parse(responseBody)\r",
+											"\r",
+											"pm.test(\"Message should be 'Exercicio excluido com sucesso!'\", () => {\r",
+											"    pm.expect(data.message).to.be.eql('Exercicio excluido com sucesso!')\r",
+											"})"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "x-auth-token",
+										"value": "{{token}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "http://localhost:3000/api/rotinas/exercicio/{{id_exercicio1}}",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"api",
+										"rotinas",
+										"exercicio",
+										"{{id_exercicio1}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "3 - Excluir",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"var data = JSON.parse(responseBody)\r",
+											"\r",
+											"pm.test(\"Message should be 'Rotina excluida com sucesso!'\", () => {\r",
+											"    pm.expect(data.message).to.be.eql('Rotina excluida com sucesso!')\r",
+											"})"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "x-auth-token",
+										"value": "{{token}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "http://localhost:3000/api/rotinas/{{id_rotina}}",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"api",
+										"rotinas",
+										"{{id_rotina}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "4 - Excluir usuario",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"var data = JSON.parse(responseBody)\r",
+											"\r",
+											"pm.test(\"Message should be 'Usuario excluido com sucesso!'\", () => {\r",
+											"    pm.expect(data.message).to.be.eql('Usuario excluido com sucesso!')\r",
+											"})"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "x-auth-token",
+										"value": "{{token}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "http://localhost:3000/api/usuarios/{{id_usuario}}",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"api",
+										"usuarios",
+										"{{id_usuario}}"
+									],
+									"query": [
+										{
+											"key": "x-auth-token",
+											"value": null,
+											"disabled": true
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		}
+	]
+}
