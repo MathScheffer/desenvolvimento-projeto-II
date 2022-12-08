@@ -9,16 +9,14 @@ export default class TratamentoErros {
     }
 
     setaTipoErroEInformacoes(){
-      
+        console.log(this.erro)
         if(this.erro.hasOwnProperty("uniqueError")){
             this.erro = this.erro.uniqueError
             this.message = this.erro.message;
             
             this.parametrosInformados = Object.entries(this.erro.parametro_informado)
             
-        }else if(this.erro.erro || this.erro.message){
-            this.erro = this.erro.erro || this.erro.message
-        }else{
+        } else if(!(this.erro.erro || this.erro.message)){
             const arrAtributosUsuario = 
             ["nome" ,"senha","whatsapp","idade","peso","sexo","objetivo","rotina","CastError"]
             for (const obj of Object.entries(this.erro)){
@@ -29,6 +27,9 @@ export default class TratamentoErros {
                 }
                 
             }
+        }else {
+            this.erro = this.erro.erro || this.erro.message
+            console.log(this.erro)
         }
     }
 
@@ -38,10 +39,12 @@ export default class TratamentoErros {
             for (const obj of this.parametrosInformados){
                 this.message  = this.message +  obj.join("= ")
             }
-        }else if(typeof this.erro){
-            this.message = this.erro
-        }else if(this.arrMessage){
+        }else if(this.arrMessage.length > 0){
+            console.log(this.erro)
             this.message = this.arrMessage.join(",")
+        }else if(this.erro){
+            console.log(this.erro)
+            this.message = this.erro
         }
 
         return this.message

@@ -8,15 +8,13 @@ import { useEffect, useRef, useState } from "react";
 import TratamentoErros from '../../utils/tratamentoErros';
 import Mensagem from '../mensagem';
 
-const AdicionarExercicio = ({indexCard, apagarAddCard, idRotina, setReloadPopup}) => {
+const AdicionarExercicio = ({indexCard, apagarAddCard, idRotina, setReloadPopup, setMensagem, setError}) => {
     const atributos = useRef()
     const doRequest = useRef(false);
     let timeOutRef = useRef();
 
     const {data, loading, error, request} = useFetch();
     const [addRequest, setAddRequest] = useState(0);
-
-    const [mensagem, setMensagem] = useState()
 
     const [form,setForm] = useState({})
 
@@ -48,16 +46,21 @@ const AdicionarExercicio = ({indexCard, apagarAddCard, idRotina, setReloadPopup}
     },[addRequest])
 
     useEffect(() => {
+        console.log(data)
+        if(data && data.message && data.message.includes('Rotina atualizada com sucesso!')){
+            setMensagem(data.message)
+
+            clearTimeout(timeOutRef.current)
+
+            timeOutRef.current = setTimeout(() => {
+                setMensagem(null)
+            },1500)
+        }
+    },[data])
+
+    useEffect(() => {
         if(error){
-            if(error.erro && error.erro.includes("Necessario informar o token")){
-                setMensagem(new TratamentoErros(error).mensagemErro())
-
-                clearTimeout(timeOutRef.current);
-
-                timeOutRef.current = setTimeout(() => {
-                    setMensagem(null)
-                }, 1500)
-            }
+            setError(error)
         }
     },[error])
 
@@ -91,7 +94,7 @@ const AdicionarExercicio = ({indexCard, apagarAddCard, idRotina, setReloadPopup}
 
     return(
         <>
-        {error && mensagem && <Mensagem conteudo={mensagem} tipo='danger'/>}
+
         <AdicionarExercicioUi  
             nome={form.nome}
             repeticoes={form.repeticoes}

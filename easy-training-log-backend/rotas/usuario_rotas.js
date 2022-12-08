@@ -6,8 +6,11 @@ const middleware_role = require('../middleware/role')
 
 //router.use(middleware_role.validarTokenAdm)
 router.post('/',controller.adicionar)
+
+
 router.get('/',controller.listar)
 router.get('/query',controller.encontrarUsuarioPorNome)
+
 router.get('/:id',controller.encontrarUsuario)
 
 router.put('/incrementar-rotina/:id',controller.incrementarRotina)

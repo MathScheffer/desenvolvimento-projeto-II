@@ -55,3 +55,5 @@
 <a href="https://www.flaticon.com/br/icones-gratis/espelho" title="espelho ícones">Espelho ícones criados por agus raharjo - Flaticon</a>
 
 <a href="https://www.flaticon.com/br/icones-gratis/mesa-da-frente" title="mesa da frente ícones">Mesa da frente ícones criados por cah nggunung - Flaticon</a>
+
+<a href="https://www.flaticon.com/br/icones-gratis/validacao" title="validação ícones">Validação ícones criados por Uniconlabs - Flaticon</a>
