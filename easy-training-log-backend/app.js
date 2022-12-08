@@ -4,8 +4,7 @@ const app = express();
 const mongoose = require('mongoose')
 const port = 3000
 const swaggerUi = require('swagger-ui-express')
-const swaggerJsDoc = require('swagger-jsdoc')
-
+const YAML = require('yamljs') 
 
 app.use(express.json()) // for parsing application/json
 app.use(express.urlencoded({ extended: true })) // for parsing application/x-www-form-urlencoded
@@ -31,26 +30,8 @@ mongoose.Promise = global.Promise;
 
 app.use(cors())
 
-const options = {
-  definition: {
-    openapi: "3.0.0",
-    info:{
-      title: "Library API",
-      version: "1.0.0",
-      description:"Swagger da aplica~]apo"
-    },
-    servers: [
-      {
-        url:"http://localhost:3000"
-      }
-    ]
-  },
-  apis:['./rotas/token.js','./rotas/usuario_rotas.js', './rotas/rotina_rotas.js',]
-}
-
-const specs = swaggerJsDoc(options)
-
-app.use("/api-docs",swaggerUi.serve,swaggerUi.setup(specs))
+const swaggerDocument = YAML.load('./swagger.yaml')
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument))
 
 app.use('/api/token', rotasToken)
 app.use(middleware.validarToken)

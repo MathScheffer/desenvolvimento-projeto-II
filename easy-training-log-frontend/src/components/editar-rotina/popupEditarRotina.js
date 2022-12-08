@@ -36,7 +36,7 @@ const PopupEditarRotina = ({setReload}) => {
     const [idUsuario, setIdUsuario] = useState();
     const [mensagem, setMensagem] = useState();
 
-    const {data, loading, error, request} = useFetch();
+    const {data, loading, error, request, setError} = useFetch();
 
     useEffect(() => {
         const options = {
@@ -51,7 +51,7 @@ const PopupEditarRotina = ({setReload}) => {
 
     useEffect(() => {
        setRotinaAtual(data)
-        
+       console.log(data) 
     },[data])
 
     useEffect(() => {
@@ -63,6 +63,8 @@ const PopupEditarRotina = ({setReload}) => {
                         apagarAddCard={apagarAddCard}
                         setReloadPopup={setReloadPopup}
                         idRotina={params.id_rotina}
+                        setMensagem={setMensagem}
+                        setError={setError}
                     ></AdicionarExercicio>])
             }  
     }, [addCard])
@@ -97,7 +99,16 @@ const PopupEditarRotina = ({setReload}) => {
                         setModalAtivo(false);
                         setFormsAddList([]);
                         setReload(reload => reload + 1);
-                        navigate("/editar/" + params.id +"/")
+
+                        setMensagem('Rotina excluida com sucesso!')
+
+                        clearTimeout(timeOutRef.current)
+
+                        timeOutRef.current = setTimeout(() => {
+                            setMensagem(null)
+                            navigate("/editar/" + params.id +"/")
+                        },1500)
+                        
                     }
                 })
         }
@@ -133,8 +144,11 @@ const PopupEditarRotina = ({setReload}) => {
 
     useEffect(() => {
         if(error){
-            if(error.erro && error.erro.includes('Necessario informar o token')){
+            console.log(error)
+            if(error.erro && error.erro.includes('Necessario informar o token') || error.message){
+
                 setMensagem(new TratamentoErros(error).mensagemErro())
+                console.log(new TratamentoErros(error).mensagemErro())
 
                 clearTimeout(timeOutRef.current)
 
@@ -170,7 +184,12 @@ const PopupEditarRotina = ({setReload}) => {
     
 return(
     <>
-    {error && mensagem && <Mensagem conteudo={mensagem} tipo='danger'/>}
+    
+
+    {error && mensagem && <Mensagem tipo='danger' conteudo={`${mensagem}`}/>
+            }
+    {(data && mensagem && !error) && <Mensagem conteudo={mensagem} tipo='sucess'/> }
+
     <Helmet>
         <meta charset="UTF-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />

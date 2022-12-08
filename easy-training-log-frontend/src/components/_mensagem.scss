@@ -1,12 +1,31 @@
 #mensagem{
-    position: absolute;
-    top: 0;
-    width: 100%;
+    position: fixed;
+    top: 2%;
+    width: 50%;
     border-radius: 7px;
-    right: 0;
+    right: 5.5%;
     font-size: 24px;
     padding-left: 15px;
-    z-index: 3000;
+    z-index: 10000;
+    @include keyframes(riseMessage){
+        0%{
+            opacity: 0;
+            right: 25%;
+        }
+        100%{
+            //right: 5.5%;
+        }
+    }
+    @include animate(riseMessage, .4s, ease-out, 1);
+
+    @include d(m){
+        width: 80%;
+    }
+
+    @include d(s){
+        width: 100%
+    }
+
     &.danger{
         background-color: tomato;
         color: #c41d00;
@@ -26,3 +45,4 @@
 .ativada{
     display: block;
 }
+

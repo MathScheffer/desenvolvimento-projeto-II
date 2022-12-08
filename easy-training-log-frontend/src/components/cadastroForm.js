@@ -63,11 +63,10 @@ const CadastroForm = ({setTriggerGetUsuarios, setNome, ...props}) => {
     useEffect(() => {
       if(error){
         setMensagem(new TratamentoErros(error).mensagemErro())
-
         clearTimeout(timeOutRef.current)
         timeOutRef.current = setTimeout(() => {
             setMensagem(null);
-        }, 3000)
+        }, 3500)
       }
       console.log(error)
     },error)
@@ -116,7 +115,6 @@ const CadastroForm = ({setTriggerGetUsuarios, setNome, ...props}) => {
             {error && mensagem && <Mensagem tipo='danger' conteudo={`${mensagem}`}/>
             }
             {data && mensagem && <Mensagem tipo='sucess' conteudo={mensagem} />}
-            
             <section id="cadastro-form">
                 <h2>Cadastrar Aluno</h2>
 
