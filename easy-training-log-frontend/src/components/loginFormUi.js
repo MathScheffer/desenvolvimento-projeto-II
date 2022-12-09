@@ -16,6 +16,7 @@ const LoginFormUi = ({handleChange, onSubmit, usuario, senha, logar}) => {
                         <div className='input-container'>
                             <label htmlFor="usuario">Usuario</label>
                             <input 
+                                required
                                 id='usuario'
                                 name="usuario" 
                                 value={usuario}
@@ -26,6 +27,7 @@ const LoginFormUi = ({handleChange, onSubmit, usuario, senha, logar}) => {
                         <div className='input-container'>
                             <label htmlFor="senha">Senha</label>
                             <input 
+                            required
                                 id='senha'
                                 name="senha" 
                                 value={senha}

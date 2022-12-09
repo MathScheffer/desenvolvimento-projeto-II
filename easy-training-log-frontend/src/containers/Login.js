@@ -6,12 +6,16 @@ import requests from '../constants/requests'
 import JWT from 'jsonwebtoken';
 import { useNavigate } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
+import { clearTimeout } from 'timers';
+import Mensagem from '../components/mensagem';
 
 const Login = () => {
     const canLogin = useRef(false);
     const navigate = useNavigate();
 
     const [loginTrigger, setLoginTrigger] = useState(0);
+    const [mensagem, setMensagem] = useState();
+    let timeOutRef = useRef();
     const {data, loading, error, request} = useFetch()
     const [form, setForm] = useState({
         usuario: '',
@@ -53,6 +57,13 @@ const Login = () => {
 
     useEffect(() => {
         console.log(error)
+        if(error && error.erro){
+            setMensagem(error.erro)
+            clearTimeout(timeOutRef.current)
+            timeOutRef.current = setTimeout(() => {
+                setMensagem(null);
+            }, 3500)
+        }
     },[error])
     
     useEffect(() => {
@@ -76,6 +87,7 @@ const Login = () => {
 
     return (
         <>
+            {error && mensagem &&  <Mensagem tipo='danger' conteudo={mensagem}/>}
             <Helmet>
                 <meta charset="UTF-8" />
                 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
