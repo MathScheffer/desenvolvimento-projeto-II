@@ -13,6 +13,8 @@ Primerio, você precisará instalar um banco de dados MongoDB e, nele, um banco 
 
 Este usuário terá como nome **Matheus Scheffer** e senha **123** para entrar na parte do Front-end da aplicação e também nos testes de api.
 
+*Importante*: Todo usuário deverá ter um Nome e Sobrenome separados por um espaço!
+
 ## Back-End
 O Back-End é conectado pelo banco de dados via url `'mongodb://localhost/easy_training_log'`, por tanto, o banco de dados **necessariamente** deve se chamar **easy_training_log**!
 O Back-end será exposto pela url `http://localhost:3000`.
